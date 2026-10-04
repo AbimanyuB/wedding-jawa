@@ -92,6 +92,16 @@ a{color:inherit}
 #openBtn{animation:fadeUp 1s 2s both,pulse 2.4s 3.2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(111,78,55,.45)}60%{box-shadow:0 0 0 14px rgba(111,78,55,0)}}
 
+/* ===== intro video ===== */
+#intro{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse at center,#5e4130 0%,#2a1b12 75%);transition:opacity 1.2s ease,visibility 0s 1.2s}
+#intro.done{opacity:0;visibility:hidden}
+#intro video{width:100%;height:100%;object-fit:cover}
+@media (min-aspect-ratio:3/4){#intro video{width:auto;height:100%;max-width:100%;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.5)}}
+#skipIntro{position:absolute;right:16px;bottom:28px;z-index:2;padding:8px 16px;font-size:.72rem;
+  background:rgba(43,28,19,.55);color:#f6efe2;border-color:rgba(201,166,132,.7);backdrop-filter:blur(4px);opacity:0;animation:fadeUp .8s 1s both}
+#introBar{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,#c9a684,#f0dcb4);z-index:2}
+
 /* ===== layout ===== */
 .side{display:none}
 main{position:relative;z-index:1;max-width:480px;margin:0 auto;background:rgba(248,246,241,.8);box-shadow:0 0 50px rgba(63,43,30,.25);overflow:hidden}
@@ -314,6 +324,13 @@ nav.bottom svg{width:20px;height:20px}
   <symbol id="pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
   <symbol id="copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 9h11v11H9zM5 15H4V4h11v1"/></symbol>
 </svg>
+
+<!-- ===== INTRO VIDEO ===== -->
+<div id="intro">
+  <video id="introVid" src="java-heritage.mp4" muted playsinline autoplay preload="auto" aria-label="Video pembuka"></video>
+  <button class="btn" id="skipIntro" type="button">Lewati</button>
+  <div id="introBar"></div>
+</div>
 
 <!-- ===== COVER ===== -->
 <div id="cover">
@@ -662,7 +679,31 @@ nav.bottom svg{width:20px;height:20px}
   if (to) document.getElementById('guestName').textContent = to.slice(0, 80);
 
   var cover = document.getElementById('cover');
-  requestAnimationFrame(function(){ cover.classList.add('cover-in'); });
+
+  /* ---------- intro video, then the cover animates in ---------- */
+  var intro = document.getElementById('intro'), vid = document.getElementById('introVid');
+  var introBar = document.getElementById('introBar'), introDone = false, startT;
+  function endIntro(){
+    if (introDone) return;
+    introDone = true;
+    clearTimeout(startT);
+    intro.classList.add('done');
+    cover.classList.add('cover-in');
+    try { vid.pause(); } catch (e) {}
+    setTimeout(function(){ intro.style.display = 'none'; vid.removeAttribute('src'); vid.load(); }, 1300);
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) endIntro();
+  vid.addEventListener('ended', endIntro);
+  vid.addEventListener('error', endIntro);
+  vid.addEventListener('timeupdate', function(){
+    if (vid.duration) introBar.style.width = (vid.currentTime / vid.duration * 100) + '%';
+  });
+  vid.addEventListener('playing', function(){ clearTimeout(startT); });
+  document.getElementById('skipIntro').addEventListener('click', endIntro);
+  // skip straight to the cover if the video can't start (slow network or autoplay blocked)
+  startT = setTimeout(endIntro, 5000);
+  var p = vid.play();
+  if (p && p.catch) p.catch(endIntro);
 
   /* ---------- YouTube background music ---------- */
   var player = null, ready = false, wantPlay = false, playing = false;
