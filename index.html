@@ -48,14 +48,13 @@ a{color:inherit}
 .gebyok{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:url(img/frame-top.webp) center top/100% auto no-repeat,
     url(img/frame-bottom.webp) center bottom/100% auto no-repeat,
-    url(img/frame-side.webp) center top/100% auto repeat-y;
-  filter:drop-shadow(0 4px 10px rgba(50,32,20,.35))}
+    url(img/frame-side.webp) center top/100% auto repeat-y}
 /* on wide viewports scale by height as well (--fw = frame width that fits 1672x941),
    letting the bands widen to the edges instead of growing tall */
 #cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
 #cover .gebyok{--fw:min(100vw,100vh*1672/941)}
 .side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
-.melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;filter:drop-shadow(0 3px 4px rgba(60,40,25,.45))}
+.melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px}
 .melati svg{display:block;width:100%;height:auto;overflow:visible}
 .m-cluster{transform-origin:0 0;animation:msway 6s ease-in-out infinite alternate}
 .m-leaf{animation:mleaf 4s ease-in-out infinite alternate}
@@ -200,7 +199,7 @@ footer{font-size:.85rem;opacity:.65;margin-top:30px}
 .sec-bloom svg{width:100%;height:auto;display:block}
 
 /* ===== reveal ===== */
-[data-anim]{opacity:0;transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1);will-change:transform,opacity}
+[data-anim]{opacity:0;transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
 [data-anim="up"]{transform:translateY(40px)}
 [data-anim="down"]{transform:translateY(-40px)}
 [data-anim="left"]{transform:translateX(-60px)}
@@ -598,8 +597,8 @@ nav.bottom svg{width:20px;height:20px}
         front += '<ellipse cy="' + (-s * .55) + '" rx="' + (s * .33) + '" ry="' + (s * .58) + '" transform="rotate(' + (i * 60) + ')"/>';
       }
       return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')"><g class="m-bloom" style="' + anim() + '">' +
-        '<g fill="#f3ecdb" stroke="#d3c9b0" stroke-width=".6">' + back + '</g>' +
-        '<g fill="#fffdf7" stroke="#d9d2bf" stroke-width=".6">' + front + '</g>' +
+        '<g fill="#f3ecdb" stroke="#b5a88a" stroke-width=".8">' + back + '</g>' +
+        '<g fill="#fffdf7" stroke="#bcae8e" stroke-width=".8">' + front + '</g>' +
         '<circle r="' + (s * .22) + '" fill="#e9d79a"/><circle r="' + (s * .09) + '" fill="#c9a45c"/></g></g>';
     }
     function bud(x, y, a){
