@@ -50,6 +50,11 @@ a{color:inherit}
     url(img/frame-bottom.webp) center bottom/100% auto no-repeat,
     url(img/frame-side.webp) center top/100% auto repeat-y;
   filter:drop-shadow(0 4px 10px rgba(50,32,20,.35))}
+/* on wide viewports scale by height as well (--fw = frame width that fits 1672x941),
+   letting the bands widen to the edges instead of growing tall */
+#cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
+#cover .gebyok{--fw:min(100vw,100vh*1672/941)}
+.side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
 .janur{position:absolute;z-index:3;pointer-events:none;width:34%;max-width:200px}
 .janur svg{display:block;width:100%;height:auto}
 .janur.tl{left:3%;top:4%}
