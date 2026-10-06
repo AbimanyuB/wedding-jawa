@@ -54,14 +54,13 @@ a{color:inherit}
 #cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
 #cover .gebyok{--fw:min(100vw,100vh*1672/941)}
 .side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
-.melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px}
-.melati svg{display:block;width:100%;height:auto;overflow:visible}
-.m-cluster{transform-origin:0 0;animation:msway 6s ease-in-out infinite alternate}
-.m-leaf{animation:mleaf 4s ease-in-out infinite alternate}
-@keyframes mleaf{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
-.m-bloom{animation:mbloom 5s ease-in-out infinite}
-@keyframes msway{from{transform:rotate(-2deg) scale(.98)}to{transform:rotate(2.5deg) scale(1.02)}}
-@keyframes mbloom{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.1) rotate(10deg)}}
+.melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;aspect-ratio:1}
+/* whole layers are animated (GPU-composited); animating shapes inside the SVG repaints every frame and flickers on phones */
+.m-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform-origin:0 0;will-change:transform}
+.m-leaves{animation:mleaf 4.5s ease-in-out infinite alternate}
+.m-blooms{animation:msway 6s ease-in-out infinite alternate}
+@keyframes mleaf{from{transform:rotate(-4deg)}to{transform:rotate(3deg)}}
+@keyframes msway{from{transform:rotate(-2deg) scale(.97)}to{transform:rotate(2.5deg) scale(1.04)}}
 .bloom{position:absolute;z-index:4;pointer-events:none;width:48%;max-width:250px}
 .bloom.tr{right:0;top:0}
 .bloom svg{width:100%;height:auto;display:block;animation:breathe 6s ease-in-out infinite}
@@ -94,8 +93,10 @@ a{color:inherit}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,43,30,.35)}
 .btn.ghost{background:rgba(255,255,255,.5);color:var(--wood-dark);border-color:var(--wood)}
 .btn svg{width:16px;height:16px}
-#openBtn{animation:fadeUp 1s 2s both,pulse 2.4s 3.2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(111,78,55,.45)}60%{box-shadow:0 0 0 14px rgba(111,78,55,0)}}
+#openBtn{position:relative;animation:fadeUp 1s 2s both}
+/* pulse ring uses transform/opacity only, so it never repaints the button */
+#openBtn::after{content:'';position:absolute;inset:-2px;border-radius:inherit;border:2px solid rgba(111,78,55,.5);opacity:0;pointer-events:none;animation:ring 2.4s 3.2s ease-out infinite}
+@keyframes ring{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(1.15,1.5)}}
 
 /* ===== layout ===== */
 .side{display:none}
@@ -588,33 +589,31 @@ nav.bottom svg{width:20px;height:20px}
 
   /* ---------- jasmine bouquet tucked into the top-left corner ---------- */
   function melatiSVG(){
-    var r = rng(41);
-    function anim(){ return 'animation-duration:' + (3.5 + r() * 2.5).toFixed(1) + 's;animation-delay:' + (-r() * 5).toFixed(1) + 's'; }
     function bloom(x, y, s, rot){
       var back = '', front = '';
       for (var i = 0; i < 6; i++) {
         back += '<ellipse cy="' + (-s * .58) + '" rx="' + (s * .3) + '" ry="' + (s * .56) + '" transform="rotate(' + (i * 60 + 30) + ')"/>';
         front += '<ellipse cy="' + (-s * .55) + '" rx="' + (s * .33) + '" ry="' + (s * .58) + '" transform="rotate(' + (i * 60) + ')"/>';
       }
-      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')"><g class="m-bloom" style="' + anim() + '">' +
+      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')">' +
         '<g fill="#f3ecdb" stroke="#b5a88a" stroke-width=".8">' + back + '</g>' +
         '<g fill="#fffdf7" stroke="#bcae8e" stroke-width=".8">' + front + '</g>' +
-        '<circle r="' + (s * .22) + '" fill="#e9d79a"/><circle r="' + (s * .09) + '" fill="#c9a45c"/></g></g>';
+        '<circle r="' + (s * .22) + '" fill="#e9d79a"/><circle r="' + (s * .09) + '" fill="#c9a45c"/></g>';
     }
     function bud(x, y, a){
-      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + a + ')"><g class="m-leaf" style="' + anim() + '">' +
+      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + a + ')">' +
         '<path d="M0 0L0 -9" stroke="#8e9a72" stroke-width="1.4"/><ellipse cy="-15" rx="3.6" ry="7" fill="#fffaf0" stroke="#d6cdb6" stroke-width=".6"/>' +
-        '<path d="M-2.6 -10Q0 -6 2.6 -10" fill="#a9b58c"/></g></g>';
+        '<path d="M-2.6 -10Q0 -6 2.6 -10" fill="#a9b58c"/></g>';
     }
     var leaves = '';
     [[4, 92], [16, 78], [30, 70], [46, 84], [60, 66], [74, 80], [88, 60]].forEach(function(L){
-      leaves += '<g transform="rotate(' + L[0] + ')"><g class="m-leaf" style="' + anim() + '">' +
-        '<use href="#leaf" x="0" y="-10" width="' + L[1] + '" height="20"/></g></g>';
+      leaves += '<use href="#leaf" x="0" y="-10" width="' + L[1] + '" height="20" transform="rotate(' + L[0] + ')"/>';
     });
     var buds = bud(118, 30, 104) + bud(96, 66, 124) + bud(66, 92, 144) + bud(30, 116, 165) + bud(126, 8, 94);
     var blooms = bloom(22, 22, 22, 0) + bloom(64, 20, 17, 25) + bloom(24, 64, 17, 40) + bloom(58, 56, 15, 10) +
       bloom(98, 18, 12, 35) + bloom(16, 100, 12, 20) + bloom(88, 46, 10, 15) + bloom(44, 88, 10, 5);
-    return '<svg viewBox="0 0 160 160" aria-hidden="true"><g class="m-cluster">' + leaves + buds + blooms + '</g></svg>';
+    return '<svg class="m-layer m-leaves" viewBox="0 0 160 160" aria-hidden="true">' + leaves + buds + '</svg>' +
+      '<svg class="m-layer m-blooms" viewBox="0 0 160 160" aria-hidden="true">' + blooms + '</svg>';
   }
   var CORNER_MELATI = melatiSVG();
   document.querySelectorAll('[data-melati]').forEach(function(el){ el.innerHTML = CORNER_MELATI; });
