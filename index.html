@@ -55,11 +55,13 @@ a{color:inherit}
 #cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
 #cover .gebyok{--fw:min(100vw,100vh*1672/941)}
 .side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
-.melati{position:absolute;z-index:3;pointer-events:none;left:2%;top:1%;width:46%;max-width:280px;filter:drop-shadow(0 3px 4px rgba(60,40,25,.45))}
+.melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;filter:drop-shadow(0 3px 4px rgba(60,40,25,.45))}
 .melati svg{display:block;width:100%;height:auto;overflow:visible}
-.m-strand{animation:msway 4s ease-in-out infinite alternate}
+.m-cluster{transform-origin:0 0;animation:msway 6s ease-in-out infinite alternate}
+.m-leaf{animation:mleaf 4s ease-in-out infinite alternate}
+@keyframes mleaf{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
 .m-bloom{animation:mbloom 5s ease-in-out infinite}
-@keyframes msway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes msway{from{transform:rotate(-2deg) scale(.98)}to{transform:rotate(2.5deg) scale(1.02)}}
 @keyframes mbloom{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.1) rotate(10deg)}}
 .bloom{position:absolute;z-index:4;pointer-events:none;width:48%;max-width:250px}
 .bloom.tr{right:0;top:0}
@@ -103,7 +105,7 @@ main{position:relative;z-index:1;max-width:480px;margin:0 auto;background:rgba(2
   .side{display:block;position:fixed;top:0;left:0;bottom:0;right:480px;z-index:1;overflow:hidden}
   .side .window-content{padding:12% 20%}
   .side .names{font-size:4.4rem}
-  .side .melati{max-width:380px;width:36%}
+  .side .melati{max-width:320px;width:30%}
   .side .bloom{max-width:340px;width:32%}
   main{margin:0 0 0 auto}
 }
@@ -539,39 +541,38 @@ nav.bottom svg{width:20px;height:20px}
   }
   document.querySelectorAll('[data-forest]').forEach(function(el, i){ buildForest(el, 7 + i * 13); });
 
-  /* ---------- ronce melati: swaying jasmine strands ending in kantil ---------- */
+  /* ---------- jasmine bouquet tucked into the top-left corner ---------- */
   function melatiSVG(){
     var r = rng(41);
+    function anim(){ return 'animation-duration:' + (3.5 + r() * 2.5).toFixed(1) + 's;animation-delay:' + (-r() * 5).toFixed(1) + 's'; }
     function bloom(x, y, s, rot){
-      var p = '';
-      for (var i = 0; i < 6; i++) p += '<ellipse cy="' + (-s * .55) + '" rx="' + (s * .32) + '" ry="' + (s * .58) + '" transform="rotate(' + (i * 60) + ')"/>';
-      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')"><g class="m-bloom" style="animation-delay:' + (-r() * 5).toFixed(1) + 's">' +
-        '<g fill="#fffdf6" stroke="#d9d2bf" stroke-width=".6">' + p + '</g><circle r="' + (s * .2) + '" fill="#e9d79a"/></g></g>';
-    }
-    var strands = '';
-    [[26, 30, 150], [52, 34, 215], [78, 32, 175], [104, 28, 240], [130, 22, 135]].forEach(function(S){
-      var x = S[0], y0 = S[1], end = y0 + S[2], g = '';
-      g += '<path d="M' + x + ' ' + y0 + 'V' + end + '" stroke="#cfc6ae" stroke-width=".8"/>';
-      for (var y = y0 + 10, k = 0; y < end - 8; y += 13, k++) {
-        g += '<g transform="translate(' + x + ' ' + y + ') rotate(' + (k % 2 ? 14 : -14) + ')">' +
-          '<ellipse rx="3.4" ry="6.2" fill="#fffaf0" stroke="#d6cdb6" stroke-width=".6"/><circle cy="-6" r="1.3" fill="#a9b58c"/></g>';
+      var back = '', front = '';
+      for (var i = 0; i < 6; i++) {
+        back += '<ellipse cy="' + (-s * .58) + '" rx="' + (s * .3) + '" ry="' + (s * .56) + '" transform="rotate(' + (i * 60 + 30) + ')"/>';
+        front += '<ellipse cy="' + (-s * .55) + '" rx="' + (s * .33) + '" ry="' + (s * .58) + '" transform="rotate(' + (i * 60) + ')"/>';
       }
-      g += '<g transform="translate(' + x + ' ' + end + ')" fill="#f6ecc9" stroke="#d2bd84" stroke-width=".6">' +
-        '<ellipse cy="10" rx="3.6" ry="11" transform="rotate(24)"/><ellipse cy="10" rx="3.6" ry="11" transform="rotate(-24)"/>' +
-        '<ellipse cy="11" rx="3.8" ry="12" transform="rotate(8)"/><ellipse cy="11" rx="3.8" ry="12" transform="rotate(-8)"/>' +
-        '<circle r="2.6" fill="#a9b58c" stroke="none"/></g>';
-      strands += '<g class="m-strand" style="transform-origin:' + x + 'px ' + y0 + 'px;animation-duration:' + (3.4 + r() * 2).toFixed(1) +
-        's;animation-delay:' + (-r() * 4).toFixed(1) + 's">' + g + '</g>';
+      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')"><g class="m-bloom" style="' + anim() + '">' +
+        '<g fill="#f3ecdb" stroke="#d3c9b0" stroke-width=".6">' + back + '</g>' +
+        '<g fill="#fffdf7" stroke="#d9d2bf" stroke-width=".6">' + front + '</g>' +
+        '<circle r="' + (s * .22) + '" fill="#e9d79a"/><circle r="' + (s * .09) + '" fill="#c9a45c"/></g></g>';
+    }
+    function bud(x, y, a){
+      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + a + ')"><g class="m-leaf" style="' + anim() + '">' +
+        '<path d="M0 0L0 -9" stroke="#8e9a72" stroke-width="1.4"/><ellipse cy="-15" rx="3.6" ry="7" fill="#fffaf0" stroke="#d6cdb6" stroke-width=".6"/>' +
+        '<path d="M-2.6 -10Q0 -6 2.6 -10" fill="#a9b58c"/></g></g>';
+    }
+    var leaves = '';
+    [[4, 92], [16, 78], [30, 70], [46, 84], [60, 66], [74, 80], [88, 60]].forEach(function(L){
+      leaves += '<g transform="rotate(' + L[0] + ')"><g class="m-leaf" style="' + anim() + '">' +
+        '<use href="#leaf" x="0" y="-10" width="' + L[1] + '" height="20"/></g></g>';
     });
-    var leaves = '<use href="#leaf" x="-6" y="4" width="70" height="20" transform="rotate(18 30 14)"/>' +
-      '<use href="#leaf" x="60" y="2" width="64" height="18" transform="rotate(-10 92 11)"/>' +
-      '<use href="#leaf" x="110" y="6" width="60" height="18" transform="rotate(22 140 15)"/>';
-    var blooms = bloom(16, 22, 14, 0) + bloom(42, 14, 11, 20) + bloom(68, 26, 15, 40) + bloom(96, 14, 12, 10) +
-      bloom(122, 24, 13, 30) + bloom(148, 12, 9, 15);
-    return '<svg viewBox="0 0 200 300" aria-hidden="true">' + leaves + strands + blooms + '</svg>';
+    var buds = bud(118, 30, 104) + bud(96, 66, 124) + bud(66, 92, 144) + bud(30, 116, 165) + bud(126, 8, 94);
+    var blooms = bloom(22, 22, 22, 0) + bloom(64, 20, 17, 25) + bloom(24, 64, 17, 40) + bloom(58, 56, 15, 10) +
+      bloom(98, 18, 12, 35) + bloom(16, 100, 12, 20) + bloom(88, 46, 10, 15) + bloom(44, 88, 10, 5);
+    return '<svg viewBox="0 0 160 160" aria-hidden="true"><g class="m-cluster">' + leaves + buds + blooms + '</g></svg>';
   }
-  var MELATI = melatiSVG();
-  document.querySelectorAll('[data-melati]').forEach(function(el){ el.innerHTML = MELATI; });
+  var CORNER_MELATI = melatiSVG();
+  document.querySelectorAll('[data-melati]').forEach(function(el){ el.innerHTML = CORNER_MELATI; });
 
   /* ---------- guest name from ?to=Nama ---------- */
   var params = new URLSearchParams(location.search);
