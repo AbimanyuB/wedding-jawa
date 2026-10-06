@@ -228,6 +228,26 @@ nav.bottom.show{transform:translate(-50%,0)}
 @media (min-width:960px){nav.bottom{left:calc(100% - 240px)} #musicBtn{right:24px}}
 nav.bottom a{width:46px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:30px;color:#f0dcb4;transition:background .3s}
 nav.bottom a.active{background:rgba(240,220,180,.22)}
+
+/* ===== gallery ===== */
+.gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:118px;grid-auto-flow:dense;gap:10px;margin-top:6px}
+.g-item{position:relative;padding:4px;border:0;border-radius:14px;background:var(--ukir);background-size:28px;box-shadow:0 8px 18px rgba(63,43,30,.25);cursor:zoom-in;overflow:hidden}
+.g-item img{display:block;width:100%;height:100%;object-fit:cover;border-radius:10px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.g-item:hover img{transform:scale(1.06)}
+.g-item.tall{grid-row:span 2}
+.g-item.wide{grid-column:span 2;grid-row:span 2}
+.g-item:first-child{border-radius:120px 120px 14px 14px}
+.g-item:first-child img{border-radius:116px 116px 10px 10px}
+.lightbox{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:60px 12px;background:rgba(30,20,14,.92);animation:lbIn .35s ease both}
+.lightbox[hidden]{display:none}
+.lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.5);animation:lbZoom .45s cubic-bezier(.2,.8,.2,1) both}
+.lb-close,.lb-nav{position:absolute;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(240,220,180,.45);border-radius:50%;background:rgba(40,28,20,.6);color:#f6efe2;font-size:30px;line-height:1;cursor:pointer}
+.lb-close{top:12px;right:12px}
+.lb-nav{top:50%;transform:translateY(-50%)}
+.lb-nav.prev{left:10px}
+.lb-nav.next{right:10px}
+@keyframes lbIn{from{opacity:0}}
+@keyframes lbZoom{from{opacity:0;transform:scale(.92)}}
 nav.bottom svg{width:20px;height:20px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,30px);opacity:0;z-index:200;background:#fbfaf6;color:var(--wood-dark);padding:10px 20px;border-radius:30px;border:1px solid var(--wood-light);font-weight:600;letter-spacing:.06em;transition:.4s;pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -421,6 +441,24 @@ nav.bottom svg{width:20px;height:20px}
   </section>
   <div class="ukir-band"></div>
 
+  <!-- GALLERY (placeholder CC0 photos from StockSnap — replace img/gallery/g1..g8.webp with the couple's own) -->
+  <section id="galeri">
+    <h2 class="sec-title" data-anim="up">Galeri</h2>
+    <p class="label sec-sub" data-anim="up">Momen Bahagia</p>
+    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
+    <div class="gallery">
+      <button type="button" class="g-item tall" data-anim="left"><img src="img/gallery/g1.webp" alt="Foto galeri 1" loading="lazy"></button>
+      <button type="button" class="g-item" data-anim="right"><img src="img/gallery/g2.webp" alt="Foto galeri 2" loading="lazy"></button>
+      <button type="button" class="g-item" data-anim="right" data-delay="120"><img src="img/gallery/g3.webp" alt="Foto galeri 3" loading="lazy"></button>
+      <button type="button" class="g-item wide" data-anim="up"><img src="img/gallery/g4.webp" alt="Foto galeri 4" loading="lazy"></button>
+      <button type="button" class="g-item tall" data-anim="left"><img src="img/gallery/g5.webp" alt="Foto galeri 5" loading="lazy"></button>
+      <button type="button" class="g-item" data-anim="right"><img src="img/gallery/g6.webp" alt="Foto galeri 6" loading="lazy"></button>
+      <button type="button" class="g-item" data-anim="right" data-delay="120"><img src="img/gallery/g7.webp" alt="Foto galeri 7" loading="lazy"></button>
+      <button type="button" class="g-item wide" data-anim="up"><img src="img/gallery/g8.webp" alt="Foto galeri 8" loading="lazy"></button>
+    </div>
+  </section>
+  <div class="ukir-band"></div>
+
   <!-- GIFT -->
   <section id="kado">
     <h2 class="sec-title" data-anim="up">Tanda Kasih</h2>
@@ -504,9 +542,17 @@ nav.bottom svg{width:20px;height:20px}
   <a href="#home" aria-label="Beranda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
   <a href="#mempelai" aria-label="Mempelai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/></svg></a>
   <a href="#acara" aria-label="Acara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></a>
+  <a href="#galeri" aria-label="Galeri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg></a>
   <a href="#kado" aria-label="Tanda Kasih"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C10 4 6 4 7 7s5 1 5 1M12 8c2-4 6-4 5-1s-5 1-5 1"/></svg></a>
   <a href="#ucapan" aria-label="Ucapan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></a>
 </nav>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto galeri" hidden>
+  <button type="button" class="lb-close" aria-label="Tutup">&times;</button>
+  <button type="button" class="lb-nav prev" aria-label="Sebelumnya">&#8249;</button>
+  <img alt="">
+  <button type="button" class="lb-nav next" aria-label="Berikutnya">&#8250;</button>
+</div>
 
 <div class="toast" id="toast"></div>
 <div id="yt"><div id="ytPlayer"></div></div>
@@ -573,6 +619,38 @@ nav.bottom svg{width:20px;height:20px}
   }
   var CORNER_MELATI = melatiSVG();
   document.querySelectorAll('[data-melati]').forEach(function(el){ el.innerHTML = CORNER_MELATI; });
+
+  /* ---------- gallery lightbox ---------- */
+  var lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+  var gImgs = Array.prototype.slice.call(document.querySelectorAll('.g-item img')), gIdx = 0;
+  function showPhoto(i){
+    gIdx = (i + gImgs.length) % gImgs.length;
+    lbImg.src = gImgs[gIdx].src;
+    lbImg.alt = gImgs[gIdx].alt;
+    lbImg.style.animation = 'none'; void lbImg.offsetWidth; lbImg.style.animation = '';
+  }
+  function closePhoto(){ lb.hidden = true; }
+  gImgs.forEach(function(img, i){
+    img.parentNode.addEventListener('click', function(){ showPhoto(i); lb.hidden = false; lb.querySelector('.lb-close').focus(); });
+  });
+  lb.querySelector('.lb-close').addEventListener('click', closePhoto);
+  lb.querySelector('.prev').addEventListener('click', function(){ showPhoto(gIdx - 1); });
+  lb.querySelector('.next').addEventListener('click', function(){ showPhoto(gIdx + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) closePhoto(); });
+  document.addEventListener('keydown', function(e){
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closePhoto();
+    else if (e.key === 'ArrowLeft') showPhoto(gIdx - 1);
+    else if (e.key === 'ArrowRight') showPhoto(gIdx + 1);
+  });
+  var touchX = null;
+  lb.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function(e){
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) showPhoto(gIdx + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
 
   /* ---------- guest name from ?to=Nama ---------- */
   var params = new URLSearchParams(location.search);
@@ -698,7 +776,7 @@ nav.bottom svg{width:20px;height:20px}
         navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
       });
     }, { threshold: .35 });
-    ['home', 'mempelai', 'acara', 'kado', 'ucapan'].forEach(function(id){ navIo.observe(document.getElementById(id)); });
+    ['home', 'mempelai', 'acara', 'galeri', 'kado', 'ucapan'].forEach(function(id){ navIo.observe(document.getElementById(id)); });
   }
 
   /* ---------- RSVP & wishes (stored in this browser only) ---------- */
