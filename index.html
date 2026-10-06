@@ -55,17 +55,17 @@ a{color:inherit}
 #cover .gebyok{--fw:min(100vw,100vh*1672/941)}
 .side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
 .melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;aspect-ratio:1}
-/* whole layers are animated (GPU-composited); animating shapes inside the SVG repaints every frame and flickers on phones */
+/* flowers are pre-rendered images (img/orchid.webp, img/melati-*.webp) animated by rotation only,
+   so phones just move GPU layers instead of re-rendering SVG every frame */
 .m-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform-origin:0 0;will-change:transform}
 .m-leaves{animation:mleaf 4.5s ease-in-out infinite alternate}
 .m-blooms{animation:msway 6s ease-in-out infinite alternate}
 @keyframes mleaf{from{transform:rotate(-4deg)}to{transform:rotate(3deg)}}
-@keyframes msway{from{transform:rotate(-2deg) scale(.97)}to{transform:rotate(2.5deg) scale(1.04)}}
+@keyframes msway{from{transform:rotate(-2.5deg)}to{transform:rotate(3deg)}}
 .bloom{position:absolute;z-index:4;pointer-events:none;width:48%;max-width:250px}
 .bloom.tr{right:0;top:0}
-.bloom svg{width:100%;height:auto;display:block;animation:breathe 6s ease-in-out infinite}
-.bloom.tr svg{transform-origin:100% 0}
-@keyframes breathe{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(-1.5deg) scale(1.02)}}
+.bloom img{width:100%;height:auto;display:block;transform-origin:100% 0;will-change:transform;animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.5deg)}}
 
 /* ===== cover ===== */
 #cover{position:fixed;inset:0;z-index:100;overflow:hidden;background:var(--ivory);transition:transform 1.4s cubic-bezier(.77,0,.18,1),opacity 1.4s}
@@ -197,7 +197,7 @@ form.rsvp .btn{margin-top:16px;width:100%;justify-content:center}
 footer{font-size:.85rem;opacity:.65;margin-top:30px}
 .sec-bloom{position:absolute;top:0;right:0;width:120px;pointer-events:none}
 .sec-bloom.left{right:auto;left:0;transform:scaleX(-1)}
-.sec-bloom svg{width:100%;height:auto;display:block}
+.sec-bloom img{width:100%;height:auto;display:block}
 
 /* ===== reveal ===== */
 [data-anim]{opacity:0;transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
@@ -282,19 +282,6 @@ nav.bottom svg{width:20px;height:20px}
     <path d="M-4 6C-2 12 2 12 4 6" stroke="#8a5a24" stroke-width=".8" fill="none"/>
     <circle r="4.5" fill="#f3e6c0" stroke="#c9a45c" stroke-width=".6"/>
   </symbol>
-  <symbol id="leaf" viewBox="0 -12 80 24"><path d="M0 0C20-11 52-9 80 0C52 9 20 11 0 0Z" fill="#a3ae86"/><path d="M2 0H76" stroke="#7f8b62" stroke-width="1"/></symbol>
-  <symbol id="clusterTop" viewBox="0 0 200 200">
-    <g stroke="#8e9a72" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M200 6C170 10 140 20 112 44C96 58 84 80 66 96"/><path d="M200 30C178 40 160 60 150 90"/><path d="M150 22C140 10 130 4 116 2"/></g>
-    <use href="#leaf" x="150" y="0" width="60" height="18" transform="rotate(20 180 9)"/>
-    <use href="#leaf" x="120" y="30" width="50" height="16" transform="rotate(-30 145 38)"/>
-    <ellipse cx="62" cy="100" rx="5" ry="8" fill="#eef0e0" stroke="#a3ae86" transform="rotate(30 62 100)"/>
-    <ellipse cx="74" cy="90" rx="6" ry="9" fill="#f6f2e6" stroke="#b9c09f" transform="rotate(20 74 90)"/>
-    <ellipse cx="148" cy="96" rx="5" ry="8" fill="#eef0e0" stroke="#a3ae86"/>
-    <use href="#orchid" x="88" y="34" width="58" height="58" transform="rotate(-12 117 63)"/>
-    <use href="#orchid" x="138" y="-6" width="64" height="64" transform="rotate(10 170 26)"/>
-    <use href="#orchid" x="122" y="54" width="44" height="44" transform="rotate(-25 144 76)"/>
-    <use href="#orchid" x="92" y="-10" width="40" height="40"/>
-  </symbol>
   <symbol id="divider" viewBox="0 0 170 30">
     <g stroke="#8a6a52" stroke-width="1" fill="none"><path d="M0 15H62M108 15H170"/><path d="M62 15C56 9 50 9 46 15C50 21 56 21 62 15ZM108 15C114 9 120 9 124 15C120 21 114 21 108 15Z"/></g>
     <use href="#orchid" x="70" y="-1" width="30" height="30"/>
@@ -307,8 +294,8 @@ nav.bottom svg{width:20px;height:20px}
 <div id="cover">
   <div class="forest" data-forest></div>
   <div class="gebyok" aria-hidden="true"></div>
-  <div class="melati" data-melati></div>
-  <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+  <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
+  <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
     <p class="wedding-of seq d1">The Wedding of</p>
     <h1 class="names seq d2">Muji &amp; Agatha</h1>
@@ -329,8 +316,8 @@ nav.bottom svg{width:20px;height:20px}
 <aside class="side" aria-hidden="true">
   <div class="forest" data-forest></div>
   <div class="gebyok" aria-hidden="true"></div>
-  <div class="melati" data-melati></div>
-  <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+  <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
+  <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
     <p class="wedding-of">The Wedding of</p>
     <h2 class="names">Muji &amp; Agatha</h2>
@@ -345,8 +332,8 @@ nav.bottom svg{width:20px;height:20px}
   <section id="home">
     <div class="forest" data-forest></div>
     <div class="gebyok" aria-hidden="true"></div>
-    <div class="melati" data-melati></div>
-    <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+    <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
+    <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
     <div class="window-content">
       <p class="label" data-anim="down">Berkah Dalem</p>
       <p class="wedding-of" data-anim="up" data-delay="150" style="margin-top:10px">The Wedding of</p>
@@ -371,7 +358,7 @@ nav.bottom svg{width:20px;height:20px}
   <section>
     <div class="arch-card" data-anim="zoom">
       <div class="in">
-        <div class="sec-bloom"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+        <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
         <svg class="divider"><use href="#divider"/></svg>
         <p class="quote">“Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.”
           <cite class="label">Matius 19 : 6</cite></p>
@@ -412,7 +399,7 @@ nav.bottom svg{width:20px;height:20px}
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <div class="arch-card event" data-anim="up">
       <div class="in">
-        <div class="sec-bloom"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+        <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M32 4v14M25 11h14M18 30l14-12 14 12v28H18z"/><path d="M27 58V44a5 5 0 0 1 10 0v14"/><circle cx="32" cy="32" r="3"/></svg>
         <h3>Pemberkatan</h3>
         <p class="label sec-sub">Sakramen Perkawinan</p>
@@ -426,7 +413,7 @@ nav.bottom svg{width:20px;height:20px}
     </div>
     <div class="arch-card event" data-anim="up">
       <div class="in">
-        <div class="sec-bloom left"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+        <div class="sec-bloom left"><img src="img/orchid.webp" alt=""></div>
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M20 8h10l-2 18a5 5 0 0 1-6 0zM34 8h10l-2 18a5 5 0 0 1-6 0z"/><path d="M25 28v24M39 28v24M18 56h14M32 56h14"/><path d="M48 12l6-4M50 18h6M14 12l-6-4M14 18H8"/></svg>
         <h3>Resepsi</h3>
         <p class="label sec-sub">Pahargyan</p>
@@ -522,8 +509,8 @@ nav.bottom svg{width:20px;height:20px}
 
   <!-- CLOSING -->
   <section id="penutup">
-    <div class="sec-bloom"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
-    <div class="sec-bloom left"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
+    <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
+    <div class="sec-bloom left"><img src="img/orchid.webp" alt=""></div>
     <p data-anim="up" style="max-width:380px;margin:90px auto 0">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami.</p>
     <p class="label" data-anim="up" style="margin-top:22px;color:var(--wood)">Matur Nuwun · Berkah Dalem</p>
     <h2 class="names" data-anim="zoom">Muji &amp; Agatha</h2>
@@ -586,37 +573,6 @@ nav.bottom svg{width:20px;height:20px}
     el.innerHTML = html + '<div class="fog"></div><div class="fog f2"></div>';
   }
   document.querySelectorAll('[data-forest]').forEach(function(el, i){ buildForest(el, 7 + i * 13); });
-
-  /* ---------- jasmine bouquet tucked into the top-left corner ---------- */
-  function melatiSVG(){
-    function bloom(x, y, s, rot){
-      var back = '', front = '';
-      for (var i = 0; i < 6; i++) {
-        back += '<ellipse cy="' + (-s * .58) + '" rx="' + (s * .3) + '" ry="' + (s * .56) + '" transform="rotate(' + (i * 60 + 30) + ')"/>';
-        front += '<ellipse cy="' + (-s * .55) + '" rx="' + (s * .33) + '" ry="' + (s * .58) + '" transform="rotate(' + (i * 60) + ')"/>';
-      }
-      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ')">' +
-        '<g fill="#f3ecdb" stroke="#b5a88a" stroke-width=".8">' + back + '</g>' +
-        '<g fill="#fffdf7" stroke="#bcae8e" stroke-width=".8">' + front + '</g>' +
-        '<circle r="' + (s * .22) + '" fill="#e9d79a"/><circle r="' + (s * .09) + '" fill="#c9a45c"/></g>';
-    }
-    function bud(x, y, a){
-      return '<g transform="translate(' + x + ' ' + y + ') rotate(' + a + ')">' +
-        '<path d="M0 0L0 -9" stroke="#8e9a72" stroke-width="1.4"/><ellipse cy="-15" rx="3.6" ry="7" fill="#fffaf0" stroke="#d6cdb6" stroke-width=".6"/>' +
-        '<path d="M-2.6 -10Q0 -6 2.6 -10" fill="#a9b58c"/></g>';
-    }
-    var leaves = '';
-    [[4, 92], [16, 78], [30, 70], [46, 84], [60, 66], [74, 80], [88, 60]].forEach(function(L){
-      leaves += '<use href="#leaf" x="0" y="-10" width="' + L[1] + '" height="20" transform="rotate(' + L[0] + ')"/>';
-    });
-    var buds = bud(118, 30, 104) + bud(96, 66, 124) + bud(66, 92, 144) + bud(30, 116, 165) + bud(126, 8, 94);
-    var blooms = bloom(22, 22, 22, 0) + bloom(64, 20, 17, 25) + bloom(24, 64, 17, 40) + bloom(58, 56, 15, 10) +
-      bloom(98, 18, 12, 35) + bloom(16, 100, 12, 20) + bloom(88, 46, 10, 15) + bloom(44, 88, 10, 5);
-    return '<svg class="m-layer m-leaves" viewBox="0 0 160 160" aria-hidden="true">' + leaves + buds + '</svg>' +
-      '<svg class="m-layer m-blooms" viewBox="0 0 160 160" aria-hidden="true">' + blooms + '</svg>';
-  }
-  var CORNER_MELATI = melatiSVG();
-  document.querySelectorAll('[data-melati]').forEach(function(el){ el.innerHTML = CORNER_MELATI; });
 
   /* ---------- gallery lightbox ---------- */
   var lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
