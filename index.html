@@ -43,20 +43,23 @@ a{color:inherit}
 @keyframes fog{from{transform:translateX(-12%)}to{transform:translateX(12%)}}
 
 /* ===== gebyok frame & decor ===== */
-.gebyok{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;filter:drop-shadow(0 6px 12px rgba(50,32,20,.45))}
+/* carved frame image cut into top / bottom bands plus a repeating side strip,
+   all scaled to the box width so it fits landscape desktop and tall mobile alike */
+.gebyok{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:url(img/frame-top.webp) center top/100% auto no-repeat,
+    url(img/frame-bottom.webp) center bottom/100% auto no-repeat,
+    url(img/frame-side.webp) center top/100% auto repeat-y;
+  filter:drop-shadow(0 4px 10px rgba(50,32,20,.35))}
 .janur{position:absolute;z-index:3;pointer-events:none;width:34%;max-width:200px}
 .janur svg{display:block;width:100%;height:auto}
 .janur.tl{left:3%;top:4%}
-.janur.br{right:3%;bottom:4%;transform:scaleX(-1)}
 .j-sway{transform-origin:0 20px;animation:jsway 7s ease-in-out infinite}
 .j-dangle{transform-origin:170px 140px;animation:jdangle 3.6s ease-in-out infinite}
 @keyframes jsway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(2deg)}}
 @keyframes jdangle{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
 .bloom{position:absolute;z-index:4;pointer-events:none;width:48%;max-width:250px}
 .bloom.tr{right:0;top:0}
-.bloom.bl{left:0;bottom:0}
 .bloom svg{width:100%;height:auto;display:block;animation:breathe 6s ease-in-out infinite}
-.bloom.bl svg{animation-delay:-3s;transform-origin:0 100%}
 .bloom.tr svg{transform-origin:100% 0}
 @keyframes breathe{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(-1.5deg) scale(1.02)}}
 
@@ -76,11 +79,8 @@ a{color:inherit}
 .cover-in .gebyok{animation:frameIn 1.2s cubic-bezier(.2,.8,.2,1) both}
 @keyframes frameIn{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
 .cover-in .janur.tl{animation:dropIn 1.4s .4s cubic-bezier(.2,.8,.2,1) both}
-.cover-in .janur.br{animation:riseIn 1.4s .6s cubic-bezier(.2,.8,.2,1) both}
 .cover-in .bloom.tr{animation:bloomIn 1.4s .5s cubic-bezier(.2,.8,.2,1) both}
-.cover-in .bloom.bl{animation:bloomIn 1.4s .7s cubic-bezier(.2,.8,.2,1) both}
 @keyframes dropIn{from{opacity:0;translate:0 -40px}to{opacity:1;translate:0 0}}
-@keyframes riseIn{from{opacity:0;translate:0 40px}to{opacity:1;translate:0 0}}
 @keyframes bloomIn{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
 
 .btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;
@@ -237,19 +237,6 @@ nav.bottom svg{width:20px;height:20px}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <pattern id="ukir" width="48" height="48" patternUnits="userSpaceOnUse">
-      <rect width="48" height="48" fill="#6f4e37"/>
-      <g fill="none" stroke-linecap="round">
-        <g stroke="#3a271b" stroke-width="4.5"><path d="M0 24C8 10 20 10 24 20C27 28 18 32 14 26"/><path d="M24 48C30 36 44 36 48 24"/><path d="M24 0C20 10 30 16 36 10C40 6 36 2 32 4"/><path d="M48 24C40 38 28 38 24 28"/></g>
-        <g stroke="#b8916e" stroke-width="2.2" transform="translate(-.8 -.8)"><path d="M0 24C8 10 20 10 24 20C27 28 18 32 14 26"/><path d="M24 48C30 36 44 36 48 24"/><path d="M24 0C20 10 30 16 36 10C40 6 36 2 32 4"/><path d="M48 24C40 38 28 38 24 28"/></g>
-      </g>
-      <path d="M30 26C36 22 42 26 40 34C34 36 30 32 30 26Z" fill="#a37b5a"/>
-      <g fill="#2b1c13"><ellipse cx="10" cy="38" rx="3" ry="5"/><ellipse cx="38" cy="14" rx="2.5" ry="4"/><circle cx="34" cy="40" r="2"/></g>
-    </pattern>
-    <linearGradient id="woodShade" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset=".05" stop-color="#000" stop-opacity="0"/>
-      <stop offset=".95" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/>
-    </linearGradient>
     <radialGradient id="petal" cx=".5" cy=".6" r=".7"><stop offset="0" stop-color="#fffefb"/><stop offset=".7" stop-color="#f8f4ea"/><stop offset="1" stop-color="#e9e1cf"/></radialGradient>
     <linearGradient id="goldc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9cf8a"/><stop offset="1" stop-color="#b8863c"/></linearGradient>
   </defs>
@@ -282,31 +269,6 @@ nav.bottom svg{width:20px;height:20px}
     <use href="#orchid" x="122" y="54" width="44" height="44" transform="rotate(-25 144 76)"/>
     <use href="#orchid" x="92" y="-10" width="40" height="40"/>
   </symbol>
-  <symbol id="clusterBottom" viewBox="0 0 200 200">
-    <g stroke="#8e9a72" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M0 196C30 190 60 176 84 150C100 132 110 110 124 92"/><path d="M0 170C24 160 40 140 50 112"/></g>
-    <use href="#leaf" x="0" y="178" width="70" height="20" transform="rotate(-12 35 188)"/>
-    <use href="#leaf" x="34" y="150" width="56" height="18" transform="rotate(-40 62 159)"/>
-    <use href="#leaf" x="-6" y="140" width="50" height="16" transform="rotate(-60 19 148)"/>
-    <ellipse cx="126" cy="90" rx="5" ry="8" fill="#eef0e0" stroke="#a3ae86" transform="rotate(35 126 90)"/>
-    <ellipse cx="52" cy="108" rx="5" ry="8" fill="#f6f2e6" stroke="#b9c09f"/>
-    <use href="#orchid" x="62" y="104" width="62" height="62" transform="rotate(8 93 135)"/>
-    <use href="#orchid" x="10" y="122" width="54" height="54" transform="rotate(-10 37 149)"/>
-    <use href="#orchid" x="92" y="88" width="42" height="42" transform="rotate(20 113 109)"/>
-    <use href="#orchid" x="104" y="140" width="50" height="50"/>
-  </symbol>
-  <symbol id="rosette" viewBox="-20 -20 40 40">
-    <circle r="19" fill="#5a3d2b" stroke="#c9a684" stroke-width="1.2"/>
-    <g fill="#a37b5a" stroke="#3a271b" stroke-width=".6">
-      <ellipse cx="0" cy="-10" rx="4" ry="8"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(45)"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(90)"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(135)"/>
-      <ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(180)"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(225)"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(270)"/><ellipse cx="0" cy="-10" rx="4" ry="8" transform="rotate(315)"/>
-    </g>
-    <circle r="4.5" fill="#c9a684"/>
-  </symbol>
-  <symbol id="pendant" viewBox="-24 0 48 70">
-    <path d="M-22 0H22L16 10C24 20 18 36 0 48C-18 36-24 20-16 10Z" fill="url(#ukir)" stroke="#2e1f15" stroke-width="2"/>
-    <path d="M-22 0H22L16 10C24 20 18 36 0 48C-18 36-24 20-16 10Z" fill="none" stroke="#c9a684" stroke-width=".8"/>
-    <path d="M0 48V58" stroke="#5a3d2b" stroke-width="2"/><path d="M-6 58H6L4 68H-4Z" fill="#8a6448" stroke="#3a271b"/>
-  </symbol>
   <symbol id="divider" viewBox="0 0 170 30">
     <g stroke="#8a6a52" stroke-width="1" fill="none"><path d="M0 15H62M108 15H170"/><path d="M62 15C56 9 50 9 46 15C50 21 56 21 62 15ZM108 15C114 9 120 9 124 15C120 21 114 21 108 15Z"/></g>
     <use href="#orchid" x="70" y="-1" width="30" height="30"/>
@@ -318,11 +280,9 @@ nav.bottom svg{width:20px;height:20px}
 <!-- ===== COVER ===== -->
 <div id="cover">
   <div class="forest" data-forest></div>
-  <svg class="gebyok" data-frame></svg>
+  <div class="gebyok" aria-hidden="true"></div>
   <div class="janur tl" data-janur></div>
-  <div class="janur br" data-janur></div>
   <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
-  <div class="bloom bl"><svg viewBox="0 0 200 200"><use href="#clusterBottom"/></svg></div>
   <div class="window-content">
     <p class="wedding-of seq d1">The Wedding of</p>
     <h1 class="names seq d2">Muji &amp; Agatha</h1>
@@ -342,11 +302,9 @@ nav.bottom svg{width:20px;height:20px}
 <div class="forest fixed" data-forest aria-hidden="true"></div>
 <aside class="side" aria-hidden="true">
   <div class="forest" data-forest></div>
-  <svg class="gebyok" data-frame></svg>
+  <div class="gebyok" aria-hidden="true"></div>
   <div class="janur tl" data-janur></div>
-  <div class="janur br" data-janur></div>
   <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
-  <div class="bloom bl"><svg viewBox="0 0 200 200"><use href="#clusterBottom"/></svg></div>
   <div class="window-content">
     <p class="wedding-of">The Wedding of</p>
     <h2 class="names">Muji &amp; Agatha</h2>
@@ -360,11 +318,9 @@ nav.bottom svg{width:20px;height:20px}
   <!-- HERO -->
   <section id="home">
     <div class="forest" data-forest></div>
-    <svg class="gebyok" data-frame></svg>
+    <div class="gebyok" aria-hidden="true"></div>
     <div class="janur tl" data-janur></div>
-    <div class="janur br" data-janur></div>
     <div class="bloom tr"><svg viewBox="0 0 200 200"><use href="#clusterTop"/></svg></div>
-    <div class="bloom bl"><svg viewBox="0 0 200 200"><use href="#clusterBottom"/></svg></div>
     <div class="window-content">
       <p class="label" data-anim="down">Berkah Dalem</p>
       <p class="wedding-of" data-anim="up" data-delay="150" style="margin-top:10px">The Wedding of</p>
@@ -614,47 +570,6 @@ nav.bottom svg{width:20px;height:20px}
   }
   var JANUR = janurSVG();
   document.querySelectorAll('[data-janur]').forEach(function(el){ el.innerHTML = JANUR; });
-
-  /* ---------- carved gebyok frame (sized to its box) ---------- */
-  function renderFrame(svg){
-    var w = svg.clientWidth, h = svg.clientHeight;
-    if (!w || !h) return;
-    var b = Math.round(Math.max(22, Math.min(54, w * .075)));
-    var cx = w / 2, y0 = Math.min(h * .36, b + w * .6), apex = b + Math.max(34, h * .05);
-    var rx = cx - b, ry = y0 - apex, N = 9, k = Math.min(14, b * .45);
-    function pt(t, o){ return [cx - (rx + o) * Math.cos(t), y0 - (ry + o) * Math.sin(t)]; }
-    var d = 'M' + b + ' ' + (h - b) + 'L' + b + ' ' + y0.toFixed(1);
-    for (var i = 1; i <= N; i++) {
-      var t0 = (i - 1) * Math.PI / N, t1 = i * Math.PI / N;
-      var A = pt(t0, 0), B = pt(t1, 0), M = pt((t0 + t1) / 2, k);
-      var C = [2 * M[0] - (A[0] + B[0]) / 2, 2 * M[1] - (A[1] + B[1]) / 2];
-      d += 'Q' + C[0].toFixed(1) + ' ' + C[1].toFixed(1) + ' ' + B[0].toFixed(1) + ' ' + B[1].toFixed(1);
-    }
-    d += 'L' + (w - b) + ' ' + (h - b) + 'Z';
-    var outer = 'M0 0H' + w + 'V' + h + 'H0Z';
-    var rs = b * 1.5;
-    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-    svg.innerHTML =
-      '<path fill-rule="evenodd" fill="url(#ukir)" d="' + outer + d + '"/>' +
-      '<path fill-rule="evenodd" fill="url(#woodShade)" d="' + outer + d + '"/>' +
-      '<rect x="4" y="4" width="' + (w - 8) + '" height="' + (h - 8) + '" fill="none" stroke="#c9a684" stroke-width="1.5" opacity=".75"/>' +
-      '<rect x="9" y="9" width="' + (w - 18) + '" height="' + (h - 18) + '" fill="none" stroke="#2e1f15" stroke-width="2" opacity=".6"/>' +
-      '<path d="' + d + '" fill="none" stroke="#2e1f15" stroke-width="7"/>' +
-      '<path d="' + d + '" fill="none" stroke="#c9a684" stroke-width="1.8"/>' +
-      '<use href="#rosette" x="' + (b * .35) + '" y="' + (b * .35) + '" width="' + rs + '" height="' + rs + '"/>' +
-      '<use href="#rosette" x="' + (w - b * .35 - rs) + '" y="' + (b * .35) + '" width="' + rs + '" height="' + rs + '"/>' +
-      '<use href="#pendant" x="' + (cx - 22) + '" y="' + (apex - 6) + '" width="44" height="64"/>';
-  }
-  var frames = document.querySelectorAll('[data-frame]');
-  function renderAll(){ frames.forEach(renderFrame); }
-  frames.forEach(function(svg){ svg.setAttribute('preserveAspectRatio', 'none'); });
-  renderAll();
-  if ('ResizeObserver' in window) {
-    var ro = new ResizeObserver(function(entries){ entries.forEach(function(en){ renderFrame(en.target); }); });
-    frames.forEach(function(svg){ ro.observe(svg); });
-  } else {
-    var rT; window.addEventListener('resize', function(){ clearTimeout(rT); rT = setTimeout(renderAll, 120); });
-  }
 
   /* ---------- guest name from ?to=Nama ---------- */
   var params = new URLSearchParams(location.search);
