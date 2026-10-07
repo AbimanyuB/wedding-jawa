@@ -76,6 +76,19 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
     url(img/m/side-l.webp) left top/22.97% auto repeat-y,
     url(img/m/side-r.webp) right top/22.97% auto repeat-y}
 }
+@media (max-width:959px){
+  /* lighter type and button on the opening screens */
+  .window-content .wedding-of{font-size:1.1rem}
+  .window-content .names{font-size:clamp(2.1rem,9.5vw,2.6rem)}
+  .window-content .date{font-size:.72rem;letter-spacing:.24em}
+  .window-content .label{font-size:.68rem}
+  .guest{margin:16px 0 14px}
+  .guest p{font-size:.85rem}
+  .guest .name{font-size:1rem;padding:6px 14px;min-width:170px}
+  .window-content .btn{font-size:.72rem;letter-spacing:.14em;padding:9px 18px}
+  /* smoother scrolling on Android: the page background behind every section stays still */
+  .forest.fixed .tlayer,.forest.fixed .fog{animation:none}
+}
 .melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;aspect-ratio:1}
 /* flowers are pre-rendered images (img/orchid.webp, img/melati-*.webp) animated by rotation only,
    so phones just move GPU layers instead of re-rendering SVG every frame */
@@ -122,7 +135,7 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
 
 /* ===== layout ===== */
 .side{display:none}
-main{position:relative;z-index:1;max-width:480px;margin:0 auto;background:rgba(248,246,241,.8);box-shadow:0 0 50px rgba(63,43,30,.25);overflow:hidden}
+main{position:relative;z-index:1;max-width:480px;margin:0 auto;background:transparent;box-shadow:0 0 50px rgba(63,43,30,.25);overflow:hidden}
 @media (min-width:960px){
   .side{display:block;position:fixed;top:0;left:0;bottom:0;right:480px;z-index:1;overflow:hidden}
   .side .window-content{padding:12% 20%}
@@ -138,8 +151,8 @@ section{position:relative;padding:68px 28px;text-align:center}
 .ukir-band{position:relative;z-index:1;height:14px;background:var(--ukir);background-size:28px;box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
 
 /* ===== hero ===== */
-#home{min-height:100vh;padding:0;overflow:hidden}
-#home .window-content{position:relative;min-height:100vh;padding:120px 22% 110px}
+#home{min-height:100vh;min-height:100svh;padding:0;overflow:hidden}
+#home .window-content{position:relative;min-height:100vh;min-height:100svh;padding:120px 22% 110px}
 .countdown{display:flex;gap:8px;justify-content:center;margin:22px 0 18px}
 .cd{width:58px;border-radius:30px 30px 8px 8px;background:var(--ukir);background-size:28px;padding:4px}
 .cd div{background:rgba(250,248,243,.95);border-radius:26px 26px 5px 5px;padding:8px 0 6px}
@@ -180,15 +193,16 @@ section{position:relative;padding:68px 28px;text-align:center}
 .map{width:100%;height:180px;border-radius:12px;margin:4px 0 16px;border:1px solid rgba(111,78,55,.35);filter:sepia(.25) saturate(.85)}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 
-/* ===== love story ===== */
-.story{position:relative;max-width:380px;margin:0 auto;text-align:left;padding-left:26px}
-.story::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--wood-light),var(--wood),var(--wood-light))}
-.story-item{position:relative;margin-bottom:22px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.6);border:1px solid rgba(111,78,55,.25);box-shadow:0 8px 18px rgba(63,43,30,.12)}
-.story-item:last-child{margin-bottom:0}
-.story-item::before{content:'';position:absolute;left:-26px;top:20px;width:16px;height:16px;border-radius:50%;background:var(--ivory);border:3px solid var(--wood)}
-.story-when{color:var(--gold)}
-.story-item h3{font-family:'Marcellus',serif;font-weight:400;font-size:1.5rem;color:var(--title);margin:2px 0 6px}
-.story-item p:last-child{font-size:1.02rem}
+/* ===== poem on paper ===== */
+/* aged paper: a static noise tile (rasterised once) over a warm radial wash, with a strip of tape on top */
+.paper{position:relative;max-width:350px;margin:8px auto 0;padding:36px 26px 26px;border-radius:3px;rotate:-1deg;
+  font-style:italic;font-size:1.08rem;line-height:1.75;color:#5a4330;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 40%,#fcf7ea 0%,#f3e8cf 65%,#e4d2aa 100%);
+  box-shadow:0 12px 26px rgba(63,43,30,.22),inset 0 0 44px rgba(150,110,60,.2)}
+.paper::before{content:'';position:absolute;top:-11px;left:50%;width:96px;height:24px;margin-left:-48px;rotate:2deg;background:rgba(232,218,184,.75);box-shadow:0 1px 3px rgba(63,43,30,.15)}
+.paper p+p{margin-top:16px}
+.paper .paper-sign{margin-top:20px;text-align:right;font-family:'Marcellus',serif;font-style:normal;font-size:1rem;color:var(--wood)}
 
 /* ===== gift ===== */
 .gift-intro{max-width:380px;margin:0 auto 22px}
@@ -255,7 +269,7 @@ footer{font-size:.85rem;opacity:.65;margin-top:30px}
 #musicBtn svg{width:22px;height:22px}
 #musicBtn .off{display:none}
 #musicBtn.muted .on{display:none}#musicBtn.muted .off{display:block}
-nav.bottom{position:fixed;left:50%;bottom:14px;transform:translate(-50%,120px);z-index:60;display:flex;gap:2px;padding:6px;border-radius:40px;background:rgba(94,65,48,.94);border:1px solid var(--wood-light);backdrop-filter:blur(6px);box-shadow:0 10px 26px rgba(63,43,30,.35);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+nav.bottom{position:fixed;left:50%;bottom:14px;transform:translate(-50%,120px);z-index:60;display:flex;gap:2px;padding:6px;border-radius:40px;background:rgba(94,65,48,.94);border:1px solid var(--wood-light);box-shadow:0 10px 26px rgba(63,43,30,.35);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 nav.bottom.show{transform:translate(-50%,0)}
 @media (min-width:960px){nav.bottom{left:calc(100% - 240px)} #musicBtn{right:24px}}
 nav.bottom a{width:46px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:30px;color:#f0dcb4;transition:background .3s}
@@ -365,13 +379,11 @@ nav.bottom svg{width:20px;height:20px}
 <main id="main">
   <!-- HERO -->
   <section id="home">
-    <div class="forest" data-forest></div>
     <div class="gebyok" aria-hidden="true"></div>
     <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
     <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
     <div class="window-content">
-      <p class="label" data-anim="down">Berkah Dalem</p>
-      <p class="wedding-of" data-anim="up" data-delay="150" style="margin-top:10px">The Wedding of</p>
+      <p class="wedding-of" data-anim="up" data-delay="150">The Wedding of</p>
       <h2 class="names" data-anim="zoom" data-delay="300">Muji<br>&amp;<br>Agatha</h2>
       <p class="date" data-anim="up" data-delay="450">SABTU, 21 NOVEMBER 2026</p>
     </div>
@@ -472,27 +484,16 @@ nav.bottom svg{width:20px;height:20px}
   </section>
   <div class="ukir-band"></div>
 
-  <!-- LOVE STORY (placeholder story — replace the years and text with Muji & Agatha's own) -->
-  <section id="cerita">
-    <h2 class="sec-title" data-anim="up">Love Story</h2>
-    <p class="label sec-sub" data-anim="up">Lampahing Tresna</p>
+  <!-- POEM -->
+  <section id="puisi">
+    <h2 class="sec-title" data-anim="up">Geguritan</h2>
+    <p class="label sec-sub" data-anim="up">Sepucuk Puisi</p>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
-    <div class="story">
-      <div class="story-item" data-anim="left">
-        <p class="label story-when">First Meet</p>
-        <h3>Awal Bertemu</h3>
-        <p>Pertemuan pertama kami terjadi begitu sederhana, tanpa pernah menyangka bahwa perkenalan singkat itu adalah awal dari perjalanan panjang yang Tuhan rancang untuk kami.</p>
-      </div>
-      <div class="story-item" data-anim="right">
-        <p class="label story-when">Relationship</p>
-        <h3>Menjalin Kasih</h3>
-        <p>Waktu terus berjalan, kami semakin mengenal satu sama lain. Dalam suka dan duka kami belajar saling memahami, hingga yakin untuk melangkah bersama membangun masa depan.</p>
-      </div>
-      <div class="story-item" data-anim="left">
-        <p class="label story-when">Engagement</p>
-        <h3>Ikatan Janji</h3>
-        <p>Dengan penuh rasa syukur dan keyakinan, kami mengikat janji dalam sebuah pertunangan. Kini kami siap menerima Sakramen Perkawinan sebagai rencana indah Tuhan yang menuntun kami sampai di titik ini.</p>
-      </div>
+    <div class="paper" data-anim="up">
+      <p>Di bawah lengkung janur kuning,<br>dua langkah yang dulu berjauhan<br>kini belajar berjalan seirama,<br>pelan, sabar, dan penuh doa.</p>
+      <p>Tak ada yang kebetulan<br>dalam pertemuan yang Tuhan rangkai;<br>setiap tawa, setiap air mata,<br>adalah benang yang menenun kita.</p>
+      <p>Hari ini kami berjanji<br>di hadapan-Nya dan di hadapanmu:<br>saling menjaga sampai senja,<br>saling setia sampai selamanya.</p>
+      <p class="paper-sign">— Muji &amp; Agatha</p>
     </div>
   </section>
   <div class="ukir-band"></div>
@@ -762,7 +763,8 @@ nav.bottom svg{width:20px;height:20px}
   function startPetals(){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var box = document.getElementById('petals');
-    for (var i = 0; i < 14; i++) {
+    var count = matchMedia('(max-width: 959px)').matches ? 7 : 14;
+    for (var i = 0; i < count; i++) {
       var p = document.createElement('span');
       var size = 10 + Math.random() * 12;
       p.className = 'petal';
