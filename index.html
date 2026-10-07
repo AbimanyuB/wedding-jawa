@@ -63,6 +63,19 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
 #cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
 #cover .gebyok{--fw:min(100vw,100vh*1672/941)}
 .side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
+/* portrait phones: frame drawn 1.6x larger as edge-anchored halves (img/m/) that meet at the
+   symmetric centre, with the pendant and crown on top, so borders and wayang stay readable */
+@media (max-width:959px) and (orientation:portrait){
+  .gebyok,#cover .gebyok{background:
+    url(img/m/pendant.webp) center top/16.08% auto no-repeat,
+    url(img/m/crown.webp) center bottom/16.08% auto no-repeat,
+    url(img/m/top-l.webp) left top/50.15% auto no-repeat,
+    url(img/m/top-r.webp) right top/50.15% auto no-repeat,
+    url(img/m/bot-l.webp) left bottom/50.15% auto no-repeat,
+    url(img/m/bot-r.webp) right bottom/50.15% auto no-repeat,
+    url(img/m/side-l.webp) left top/22.97% auto repeat-y,
+    url(img/m/side-r.webp) right top/22.97% auto repeat-y}
+}
 .melati{position:absolute;z-index:3;pointer-events:none;left:0;top:0;width:42%;max-width:240px;aspect-ratio:1}
 /* flowers are pre-rendered images (img/orchid.webp, img/melati-*.webp) animated by rotation only,
    so phones just move GPU layers instead of re-rendering SVG every frame */
