@@ -73,13 +73,21 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
     url(img/m/top-r.webp) right top/50.15% auto no-repeat,
     url(img/m/bot-l.webp) left bottom/50.15% auto no-repeat,
     url(img/m/bot-r.webp) right bottom/50.15% auto no-repeat,
-    url(img/m/side-l.webp) left top/22.97% auto repeat-y,
-    url(img/m/side-r.webp) right top/22.97% auto repeat-y}
+    url(img/m/side-l.webp) left top/19% auto repeat-y,
+    url(img/m/side-r.webp) right top/19% auto repeat-y}
+  /* the wayang are cut out of bot-l / bot-r into their own layers, laid exactly over them,
+     and rock gently on their feet; transform-only so it stays on the GPU */
+  .gebyok .wy{display:block;position:absolute;bottom:0;width:50.15%;aspect-ratio:524/401;background:center/100% no-repeat;will-change:transform;animation:wsway 3.6s ease-in-out infinite alternate}
+  .gebyok .wy.l{left:0;background-image:url(img/m/wayang-l.webp);transform-origin:43.9% 47.4%}
+  .gebyok .wy.r{right:0;background-image:url(img/m/wayang-r.webp);transform-origin:57.25% 47.9%;animation-delay:-1.8s}
 }
+.wy{display:none}
+@keyframes wsway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@media (prefers-reduced-motion:reduce){.gebyok .wy{animation:none}}
 @media (max-width:959px){
   /* lighter type and button on the opening screens */
   .window-content .wedding-of{font-size:1.1rem}
-  .window-content .names{font-size:clamp(2.1rem,9.5vw,2.6rem)}
+  .window-content .names{font-size:clamp(1.8rem,8vw,2.2rem)}
   .window-content .date{font-size:.72rem;letter-spacing:.24em}
   .window-content .label{font-size:.68rem}
   .guest{margin:16px 0 14px}
@@ -351,7 +359,7 @@ nav.bottom svg{width:20px;height:20px}
 <!-- ===== COVER ===== -->
 <div id="cover">
   <div class="forest" data-forest></div>
-  <div class="gebyok" aria-hidden="true"></div>
+  <div class="gebyok" aria-hidden="true"><i class="wy l"></i><i class="wy r"></i></div>
   <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
   <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
@@ -374,7 +382,7 @@ nav.bottom svg{width:20px;height:20px}
 <div class="forest fixed" data-forest aria-hidden="true"></div>
 <aside class="side" aria-hidden="true">
   <div class="forest" data-forest></div>
-  <div class="gebyok" aria-hidden="true"></div>
+  <div class="gebyok" aria-hidden="true"><i class="wy l"></i><i class="wy r"></i></div>
   <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
   <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
@@ -389,7 +397,7 @@ nav.bottom svg{width:20px;height:20px}
 <main id="main">
   <!-- HERO -->
   <section id="home">
-    <div class="gebyok" aria-hidden="true"></div>
+    <div class="gebyok" aria-hidden="true"><i class="wy l"></i><i class="wy r"></i></div>
     <div class="melati"><img class="m-layer m-leaves" src="img/melati-leaves.webp" alt=""><img class="m-layer m-blooms" src="img/melati-blooms.webp" alt=""></div>
     <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
     <div class="window-content">
