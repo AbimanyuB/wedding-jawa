@@ -178,6 +178,10 @@ section{position:relative;padding:68px 28px;text-align:center}
 .arch-card>.in::before{bottom:-5px;left:-5px;transform:scaleY(-1)}
 .arch-card>.in::after{bottom:-5px;right:-5px;transform:scale(-1)}
 .arch-card .sec-bloom{display:none}
+/* couple photo at the head of the quote card: arch-topped, on a cream mat with a gold hairline,
+   leaving the card's top corners free for the calligraphic ornaments */
+.couple-photo{margin:-38px auto 8px;max-width:300px;padding:5px;border-radius:999px 999px 6px 6px;background:#fbfaf6;border:1px solid rgba(167,130,60,.55);box-shadow:0 8px 20px rgba(63,43,30,.18)}
+.couple-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 70%;border-radius:999px 999px 3px 3px}
 .quote{font-style:italic;font-size:1.12rem}
 .quote cite{display:block;margin-top:12px;font-style:normal;color:var(--wood)}
 
@@ -422,6 +426,7 @@ nav.bottom svg{width:20px;height:20px}
     <div class="arch-card" data-anim="zoom">
       <div class="in">
         <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
+        <div class="couple-photo"><img src="img/couple.webp" width="900" height="1257" alt="Agatha dan Muji" loading="lazy" decoding="async"></div>
         <svg class="divider"><use href="#divider"/></svg>
         <p class="quote">“Sebab pada awal dunia, Allah menjadikan mereka laki-laki dan perempuan, sebab itu laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan istrinya, sehingga keduanya itu menjadi satu daging. Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.”
           <cite class="label">Markus 10 : 6-9</cite></p>
