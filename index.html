@@ -35,7 +35,11 @@ a{color:inherit}
 
 /* ===== misty forest ===== */
 .forest{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,#f7f5f0 0%,#eceae4 55%,#e2dfd7 100%)}
-.forest.fixed{position:fixed;z-index:0}
+/* the page behind the opened invitation: a painted joglo garden, pinned to the content column
+   (centred on tablets, right-hand on desktop) under a light cream wash so text stays readable */
+.forest.fixed{position:fixed;z-index:0;left:50%;width:min(100%,480px);transform:translateX(-50%);
+  background:linear-gradient(rgba(250,247,240,.28),rgba(250,247,240,.28)),url(img/bg-joglo.jpg) center/cover no-repeat}
+@media (min-width:960px){.forest.fixed{left:auto;right:0;transform:none}}
 /* trees are static (blur baked in via SVG filters, painted once); only the three depth layers drift,
    so phones move a few GPU layers instead of re-blurring 15 animated trees every frame */
 .tlayer{position:absolute;inset:0;will-change:transform;animation:drift 18s ease-in-out infinite alternate}
@@ -160,7 +164,8 @@ section{position:relative;padding:68px 28px;text-align:center}
 
 /* ===== hero ===== */
 #home{min-height:100vh;min-height:100svh;padding:0;overflow:hidden}
-#home .window-content{position:relative;min-height:100vh;min-height:100svh;padding:120px 22% 110px}
+#home .window-content{position:relative;min-height:100vh;min-height:100svh;padding:120px 22% 110px;
+  background:radial-gradient(ellipse 62% 30% at 50% 50%,rgba(250,247,240,.9),rgba(250,247,240,.55) 55%,rgba(250,247,240,0) 80%)}
 .countdown{display:flex;gap:8px;justify-content:center;margin:22px 0 18px}
 .cd{width:58px;border-radius:30px 30px 8px 8px;background:var(--ukir);background-size:28px;padding:4px}
 .cd div{background:rgba(250,248,243,.95);border-radius:26px 26px 5px 5px;padding:8px 0 6px}
@@ -696,7 +701,8 @@ nav.bottom svg{width:20px;height:20px}
     });
     el.innerHTML = html + '<div class="fog"></div><div class="fog f2"></div>';
   }
-  document.querySelectorAll('[data-forest]').forEach(function(el, i){ buildForest(el, 7 + i * 13); });
+  /* the fixed page background is a painted image now; only the cover / side panels get silhouettes */
+  document.querySelectorAll('[data-forest]').forEach(function(el, i){ if (!el.classList.contains('fixed')) buildForest(el, 7 + i * 13); });
 
   /* ---------- gallery lightbox ---------- */
   var lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
