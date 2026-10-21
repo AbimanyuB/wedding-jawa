@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#6f4e37">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <!-- cover frame images are CSS backgrounds, so the browser would find them late; fetch them up front -->
 <link rel="preload" as="image" href="img/frame-top.webp" fetchpriority="high">
 <link rel="preload" as="image" href="img/frame-bottom.webp" fetchpriority="high">
@@ -216,6 +216,26 @@ section{position:relative;padding:68px 28px;text-align:center}
 .event .place-sub{font-size:.98rem;margin-bottom:14px}
 .map{width:100%;height:180px;border-radius:12px;margin:4px 0 16px;border:1px solid rgba(111,78,55,.35);filter:sepia(.25) saturate(.85)}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* ===== arch panel (bride & groom, wedding event) ===== */
+/* one tall cream panel with a semicircular top and gold rule, crowned by the Thai lotus */
+.arch-panel{position:relative;max-width:420px;margin:30px auto 0;padding:84px 22px 46px;border-radius:999px 999px 14px 14px;
+  background:linear-gradient(rgba(251,250,246,.95),rgba(243,239,230,.95));border:2px solid #b8964f;
+  box-shadow:0 0 0 5px rgba(251,250,246,.7),0 0 0 6px rgba(184,150,79,.45),0 16px 34px rgba(63,43,30,.18)}
+.arch-panel::before{content:'';position:absolute;top:-31px;left:50%;width:120px;margin-left:-60px;aspect-ratio:134.33/44.98;background:url(img/thai-crown.svg) center/contain no-repeat;pointer-events:none}
+.script-title{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.6rem,11.5vw,3.3rem);line-height:1.05;color:var(--title)}
+.arch-panel .divider{margin:14px auto 18px}
+.arch-panel .person{margin:26px auto 4px}
+.arch-panel .person h3{font-family:'Great Vibes',cursive;font-size:3rem;line-height:1.1;margin-top:4px}
+.arch-panel .person .full{font-family:'Marcellus',serif;font-size:1.35rem;font-weight:400;color:var(--wood-dark);margin:2px 0 8px}
+.arch-panel .and{margin:26px 0 0}
+.oval{width:min(230px,80%);margin:0 auto 12px;aspect-ratio:4/5;border-radius:50%;padding:5px;background:linear-gradient(135deg,#e2c98c,#a7823c 55%,#d6b977);box-shadow:0 10px 24px rgba(63,43,30,.25)}
+.oval img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid #fbfaf6}
+.arch-panel .event{margin:6px auto 0}
+.arch-panel .event h3{font-family:'Great Vibes',cursive;font-size:2.7rem;line-height:1.1}
+.venue-pin{display:block;width:26px;height:26px;margin:14px auto 2px;color:var(--wood-dark)}
+.arch-panel .event .place-sub{margin-bottom:2px}
+.arch-panel .event .btn-row{margin-top:14px}
 
 /* ===== poem on paper ===== */
 /* aged paper: a static noise tile (rasterised once) over a warm radial wash, with a strip of tape on top */
@@ -436,27 +456,24 @@ nav.bottom svg{width:20px;height:20px}
 
   <!-- COUPLE -->
   <section id="mempelai" style="padding-top:20px">
-    <h2 class="sec-title" data-anim="up">Mempelai</h2>
-    <p class="label sec-sub" data-anim="up">Bride &amp; Groom</p>
-    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
-    <p class="quote" data-anim="up" style="max-width:380px;margin:0 auto 14px">“Cinta bukan tentang menemukan seseorang yang sempurna, melainkan tentang melihat kesempurnaan dalam ketidaksempurnaan satu sama lain.”</p>
-    <p data-anim="up" style="max-width:380px;margin:0 auto 26px">Dengan memohon rahmat dan berkat Tuhan, kami bermaksud menyelenggarakan Sakramen Perkawinan putra-putri kami:</p>
-    <div class="person">
-      <!-- Ganti dengan foto: <div class="inner"><img src="foto-agatha.jpg" alt="Agatha"></div> -->
-      <div class="portrait" data-anim="left"><div class="inner"><svg class="mini-tree" viewBox="0 0 240 150"><use href="#joglo"/></svg><span class="mono">A</span></div></div>
-      <h3 data-anim="up">Agatha</h3>
-      <p class="full" data-anim="up">Agatha Mayasari</p>
-      <p data-anim="up">Putri ke-3 dari 4 bersaudara<br>Bapak <b>Yoseph Susar</b><br>&amp; Ibu <b>Margaretha Sri Wahyuni</b></p>
-      <p class="addr" data-anim="up"><svg><use href="#pin"/></svg><span>Sungai Lilin, Musi Banyuasin, Sumatera Selatan</span></p>
-    </div>
-    <div class="and" data-anim="zoom">&amp;</div>
-    <div class="person">
-      <!-- Ganti dengan foto: <div class="inner"><img src="foto-muji.jpg" alt="Muji"></div> -->
-      <div class="portrait" data-anim="right"><div class="inner"><svg class="mini-tree" viewBox="0 0 240 150"><use href="#joglo"/></svg><span class="mono">M</span></div></div>
-      <h3 data-anim="up">Muji</h3>
-      <p class="full" data-anim="up">Yohanes Muji Purwanto</p>
-      <p data-anim="up">Putra ke-4 dari 5 bersaudara<br>Bapak <b>Stephanus Minanto</b><br>&amp; Ibu <b>Bernadheta Tentrem</b></p>
-      <p class="addr" data-anim="up"><svg><use href="#pin"/></svg><span>Tegal Kalibening RT 006 RW 019, Tirtomartani, Kalasan, Sleman</span></p>
+    <div class="arch-panel" data-anim="up">
+      <h2 class="script-title">Bride &amp; Groom</h2>
+      <svg class="divider"><use href="#divider"/></svg>
+      <p class="quote" style="max-width:340px;margin:0 auto 14px">“Cinta bukan tentang menemukan seseorang yang sempurna, melainkan tentang melihat kesempurnaan dalam ketidaksempurnaan satu sama lain.”</p>
+      <p style="max-width:340px;margin:0 auto 10px">Dengan memohon rahmat dan berkat Tuhan, kami bermaksud menyelenggarakan Sakramen Perkawinan putra-putri kami:</p>
+      <div class="person">
+        <div class="oval" data-anim="zoom"><img src="img/bride.webp" width="480" height="600" alt="Agatha Mayasari" loading="lazy" decoding="async"></div>
+        <h3 data-anim="up">Agatha</h3>
+        <p class="full" data-anim="up">Agatha Mayasari</p>
+        <p data-anim="up">Anak ke-3 dari<br>Bapak <b>Yoseph Susar</b><br>&amp; Ibu <b>Margaretha Sri Wahyuni</b></p>
+      </div>
+      <div class="and" data-anim="zoom">&amp;</div>
+      <div class="person">
+        <div class="oval" data-anim="zoom"><img src="img/groom.webp" width="480" height="600" alt="Yohanes Muji Purwanto" loading="lazy" decoding="async"></div>
+        <h3 data-anim="up">Muji</h3>
+        <p class="full" data-anim="up">Yohanes Muji Purwanto</p>
+        <p data-anim="up">Anak ke-4 dari<br>Bapak <b>Stephanus Minanto</b><br>&amp; Ibu <b>Bernadheta Tentrem</b></p>
+      </div>
     </div>
   </section>
   <div class="ukir-band"></div>
@@ -482,35 +499,36 @@ nav.bottom svg{width:20px;height:20px}
 
   <!-- EVENTS -->
   <section id="acara">
-    <h2 class="sec-title" data-anim="up">Rangkaian Acara</h2>
-    <p class="label sec-sub" data-anim="up">Wiwahan</p>
-    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
-    <div class="arch-card event" data-anim="up">
-      <div class="in">
-        <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
+    <div class="arch-panel" data-anim="up">
+      <h2 class="script-title">Wedding Event</h2>
+      <p class="quote" style="max-width:320px;margin:4px auto 6px">“Ia membuat segala sesuatu indah pada waktunya.”</p>
+      <p class="label" style="color:var(--wood)">Pengkhotbah 3 : 11</p>
+      <p style="max-width:330px;margin:12px auto 0">Dengan penuh sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia kami.</p>
+      <svg class="divider"><use href="#divider"/></svg>
+      <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M32 4v14M25 11h14M18 30l14-12 14 12v28H18z"/><path d="M27 58V44a5 5 0 0 1 10 0v14"/><circle cx="32" cy="32" r="3"/></svg>
         <h3>Pemberkatan</h3>
         <p class="label sec-sub">Sakramen Perkawinan</p>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
-        <p class="time">10.00 – 12.00 WIB</p>
+        <p class="time">Pukul 10.00 – 12.00 WIB</p>
+        <svg class="venue-pin"><use href="#pin"/></svg>
+        <p class="place-sub">Bertempat di:</p>
         <p class="place">Gereja Maria Marganingsih</p>
         <p class="place-sub">Kalasan, Sleman, Yogyakarta</p>
-        <iframe class="map" loading="lazy" title="Peta Gereja Maria Marganingsih Kalasan" src="https://maps.google.com/maps?q=Gereja%20Maria%20Marganingsih%20Kalasan%20Sleman&z=15&output=embed"></iframe>
-        <div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gereja+Maria+Marganingsih+Kalasan+Sleman"><svg><use href="#pin"/></svg>Lihat Lokasi</a></div>
+        <div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gereja+Maria+Marganingsih+Kalasan+Sleman"><svg><use href="#pin"/></svg>Open Maps</a></div>
       </div>
-    </div>
-    <div class="arch-card event" data-anim="up">
-      <div class="in">
-        <div class="sec-bloom left"><img src="img/orchid.webp" alt=""></div>
+      <svg class="divider"><use href="#divider"/></svg>
+      <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M20 8h10l-2 18a5 5 0 0 1-6 0zM34 8h10l-2 18a5 5 0 0 1-6 0z"/><path d="M25 28v24M39 28v24M18 56h14M32 56h14"/><path d="M48 12l6-4M50 18h6M14 12l-6-4M14 18H8"/></svg>
         <h3>Resepsi</h3>
         <p class="label sec-sub">Pahargyan</p>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
-        <p class="time">15.00 – 17.30 WIB</p>
+        <p class="time">Pukul 15.00 – 17.30 WIB</p>
+        <svg class="venue-pin"><use href="#pin"/></svg>
+        <p class="place-sub">Bertempat di:</p>
         <p class="place">Srawung Resto &amp; Kopi</p>
         <p class="place-sub">Kalasan, Sleman, Yogyakarta</p>
-        <iframe class="map" loading="lazy" title="Peta Srawung Resto dan Kopi" src="https://maps.google.com/maps?q=Srawung%20Resto%20%26%20Kopi%20Kalasan&z=15&output=embed"></iframe>
-        <div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://share.google/s35ufIw6lNggp52tL"><svg><use href="#pin"/></svg>Lihat Lokasi</a></div>
+        <div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://share.google/s35ufIw6lNggp52tL"><svg><use href="#pin"/></svg>Open Maps</a></div>
       </div>
     </div>
   </section>
