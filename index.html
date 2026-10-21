@@ -37,8 +37,13 @@ a{color:inherit}
 .forest{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,#f7f5f0 0%,#eceae4 55%,#e2dfd7 100%)}
 /* the page behind the opened invitation: a painted joglo garden, pinned to the content column
    (centred on tablets, right-hand on desktop) under a light cream wash so text stays readable */
-.forest.fixed{position:fixed;z-index:0;left:50%;width:min(100%,480px);transform:translateX(-50%);
+.forest.fixed{position:fixed;z-index:0;left:50%;width:min(100%,480px);transform:translateX(-50%);background:#f3efe6}
+.forest.fixed::before{content:'';position:absolute;inset:0;
   background:linear-gradient(rgba(250,247,240,.28),rgba(250,247,240,.28)),url(img/bg-joglo.jpg) center/cover no-repeat}
+/* when the invitation opens, the joglo garden rises into place from below */
+body:not(.locked) .forest.fixed::before{animation:bgRise 1.8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes bgRise{from{transform:translateY(38%);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){body:not(.locked) .forest.fixed::before{animation:none}}
 @media (min-width:960px){.forest.fixed{left:auto;right:0;transform:none}}
 /* trees are static (blur baked in via SVG filters, painted once); only the three depth layers drift,
    so phones move a few GPU layers instead of re-blurring 15 animated trees every frame */
@@ -231,9 +236,10 @@ section{position:relative;padding:68px 28px;text-align:center}
 .arch-panel::before{top:-31px}
 .arch-panel::after{bottom:-31px;transform:scaleY(-1)}
 /* poem in the same cornered frame as the Markus card */
-.poem .in{padding:62px 12px 44px}
+.poem{max-width:none;margin-left:-10px;margin-right:-10px}
+.poem .in{padding:62px 10px 44px}
 .poem h3{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.6rem;line-height:1.1;color:var(--title);margin-bottom:14px}
-.poem p{font-style:italic;font-size:clamp(.86rem,4.1vw,1.05rem);line-height:1.8;color:#5a4330}
+.poem p{font-style:italic;font-size:clamp(.9rem,4.5vw,1.14rem);line-height:1.8;color:#5a4330}
 .poem p+p{margin-top:16px}
 .poem .poem-credit{margin-top:22px;font-style:normal;font-size:.72rem;color:var(--wood)}
 .script-title{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.6rem,11.5vw,3.3rem);line-height:1.05;color:var(--title)}
@@ -296,6 +302,11 @@ form.rsvp .btn{margin-top:16px;width:100%;justify-content:center}
 
 /* ===== closing ===== */
 #penutup{padding-bottom:150px}
+/* sections whose text sits straight on the painted background get a feathered cream wash behind them */
+#savedate::before,#penutup::before{content:'';position:absolute;z-index:-1;border-radius:32px;pointer-events:none;
+  background:rgba(250,247,240,.74);box-shadow:0 0 36px 26px rgba(250,247,240,.74)}
+#savedate::before{inset:40px 18px 40px}
+#penutup::before{inset:80px 18px 120px}
 #penutup .names{font-size:3rem;margin:8px 0 14px}
 footer{font-size:.85rem;opacity:.65;margin-top:30px}
 .sec-bloom{position:absolute;top:0;right:0;width:120px;pointer-events:none}
@@ -474,7 +485,6 @@ nav.bottom svg{width:20px;height:20px}
       <h2 class="script-title">Bride &amp; Groom</h2>
       <svg class="divider"><use href="#divider"/></svg>
       <p class="quote" style="max-width:340px;margin:0 auto 14px">“Cinta bukan tentang menemukan seseorang yang sempurna, melainkan tentang melihat kesempurnaan dalam ketidaksempurnaan satu sama lain.”</p>
-      <p style="max-width:340px;margin:0 auto 10px">Dengan memohon rahmat dan berkat Tuhan, kami bermaksud menyelenggarakan Sakramen Perkawinan putra-putri kami:</p>
       <div class="person">
         <div class="oval" data-anim="zoom"><img src="img/bride.webp" width="480" height="600" alt="Agatha Mayasari" loading="lazy" decoding="async"></div>
         <h3 data-anim="up">Agatha</h3>
@@ -649,7 +659,6 @@ nav.bottom svg{width:20px;height:20px}
     <div class="sec-bloom left"><img src="img/orchid.webp" alt=""></div>
     <p data-anim="up" style="max-width:380px;margin:90px auto 0">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restunya untuk pernikahan kami.</p>
     <p data-anim="up" style="margin-top:14px">Atas doa &amp; restunya, kami ucapkan terima kasih.</p>
-    <p class="label" data-anim="up" style="margin-top:22px;color:var(--wood)">Matur Nuwun · Berkah Dalem</p>
     <h2 class="names" data-anim="zoom">Agatha &amp; Muji</h2>
     <p data-anim="up" style="font-size:.98rem">Kami yang berbahagia,<br>Keluarga Bapak Stephanus Minanto &amp; Ibu Bernadheta Tentrem<br>Keluarga Bapak Yoseph Susar &amp; Ibu Margaretha Sri Wahyuni</p>
     <svg class="divider" data-anim="zoom" style="margin-top:26px"><use href="#divider"/></svg>
