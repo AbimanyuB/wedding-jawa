@@ -224,10 +224,18 @@ section{position:relative;padding:68px 28px;text-align:center}
 
 /* ===== arch panel (bride & groom, wedding event) ===== */
 /* one tall cream panel with a semicircular top and gold rule, crowned by the Thai lotus */
-.arch-panel{position:relative;max-width:420px;margin:30px auto 0;padding:84px 22px 46px;border-radius:999px 999px 14px 14px;
+.arch-panel{position:relative;max-width:420px;margin:30px auto 30px;padding:84px 22px 96px;border-radius:999px;
   background:linear-gradient(rgba(251,250,246,.95),rgba(243,239,230,.95));border:2px solid #b8964f;
   box-shadow:0 0 0 5px rgba(251,250,246,.7),0 0 0 6px rgba(184,150,79,.45),0 16px 34px rgba(63,43,30,.18)}
-.arch-panel::before{content:'';position:absolute;top:-31px;left:50%;width:120px;margin-left:-60px;aspect-ratio:134.33/44.98;background:url(img/thai-crown.svg) center/contain no-repeat;pointer-events:none}
+.arch-panel::before,.arch-panel::after{content:'';position:absolute;left:50%;width:120px;margin-left:-60px;aspect-ratio:134.33/44.98;background:url(img/thai-crown.svg) center/contain no-repeat;pointer-events:none}
+.arch-panel::before{top:-31px}
+.arch-panel::after{bottom:-31px;transform:scaleY(-1)}
+/* poem in the same cornered frame as the Markus card */
+.poem .in{padding:62px 12px 44px}
+.poem h3{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.6rem;line-height:1.1;color:var(--title);margin-bottom:14px}
+.poem p{font-style:italic;font-size:clamp(.86rem,4.1vw,1.05rem);line-height:1.8;color:#5a4330}
+.poem p+p{margin-top:16px}
+.poem .poem-credit{margin-top:22px;font-style:normal;font-size:.72rem;color:var(--wood)}
 .script-title{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.6rem,11.5vw,3.3rem);line-height:1.05;color:var(--title)}
 .arch-panel .divider{margin:14px auto 18px}
 .arch-panel .person{margin:26px auto 4px}
@@ -512,8 +520,8 @@ nav.bottom svg{width:20px;height:20px}
       <svg class="divider"><use href="#divider"/></svg>
       <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M32 4v14M25 11h14M18 30l14-12 14 12v28H18z"/><path d="M27 58V44a5 5 0 0 1 10 0v14"/><circle cx="32" cy="32" r="3"/></svg>
-        <h3>Pemberkatan</h3>
-        <p class="label sec-sub">Sakramen Perkawinan</p>
+        <h3>Holy Matrimony</h3>
+        <p class="label sec-sub">Pemberkatan · Sakramen Perkawinan</p>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
         <p class="time">Pukul 10.00 – 12.00 WIB</p>
         <svg class="venue-pin"><use href="#pin"/></svg>
@@ -525,8 +533,8 @@ nav.bottom svg{width:20px;height:20px}
       <svg class="divider"><use href="#divider"/></svg>
       <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M20 8h10l-2 18a5 5 0 0 1-6 0zM34 8h10l-2 18a5 5 0 0 1-6 0z"/><path d="M25 28v24M39 28v24M18 56h14M32 56h14"/><path d="M48 12l6-4M50 18h6M14 12l-6-4M14 18H8"/></svg>
-        <h3>Resepsi</h3>
-        <p class="label sec-sub">Pahargyan</p>
+        <h3>Wedding Reception</h3>
+        <p class="label sec-sub">Resepsi · Pahargyan</p>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
         <p class="time">Pukul 15.00 – 17.30 WIB</p>
         <svg class="venue-pin"><use href="#pin"/></svg>
@@ -541,13 +549,16 @@ nav.bottom svg{width:20px;height:20px}
 
   <!-- POEM -->
   <section id="puisi">
-    <h2 class="sec-title" data-anim="up">Sepucuk Puisi</h2>
+    <h2 class="sec-title" data-anim="up">A Poem</h2>
+    <p class="label sec-sub" data-anim="up">Sepucuk Puisi</p>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
-    <div class="paper" data-anim="up">
-      <p>Di bawah lengkung janur kuning,<br>dua langkah yang dulu berjauhan<br>kini belajar berjalan seirama,<br>pelan, sabar, dan penuh doa.</p>
-      <p>Tak ada yang kebetulan<br>dalam pertemuan yang Tuhan rangkai;<br>setiap tawa, setiap air mata,<br>adalah benang yang menenun kita.</p>
-      <p>Hari ini kami berjanji<br>di hadapan-Nya dan di hadapanmu:<br>saling menjaga sampai senja,<br>saling setia sampai selamanya.</p>
-      <p class="paper-sign">— Agatha &amp; Muji</p>
+    <div class="arch-card poem" data-anim="up">
+      <div class="in">
+        <h3>Aku Ingin</h3>
+        <p>aku ingin mencintaimu dengan sederhana:<br>dengan kata yang tak sempat diucapkan<br>kayu kepada api yang menjadikannya abu</p>
+        <p>aku ingin mencintaimu dengan sederhana:<br>dengan isyarat yang tak sempat disampaikan<br>awan kepada hujan yang menjadikannya tiada</p>
+        <p class="poem-credit label">Sapardi Djoko Damono, 1989</p>
+      </div>
     </div>
   </section>
   <div class="ukir-band"></div>
