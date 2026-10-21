@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Wedding of Muji &amp; Agatha</title>
-<meta name="description" content="Undangan Pernikahan Yohanes Muji Purwanto &amp; Agatha Mayasari — Sabtu, 21 November 2026">
-<meta property="og:title" content="The Wedding of Muji &amp; Agatha">
+<title>The Wedding of Agatha &amp; Muji</title>
+<meta name="description" content="Undangan Pernikahan Agatha Mayasari &amp; Yohanes Muji Purwanto — Sabtu, 21 November 2026">
+<meta property="og:title" content="The Wedding of Agatha &amp; Muji">
 <meta property="og:description" content="Sabtu, 21 November 2026 · Gereja Maria Marganingsih Kalasan, Sleman">
 <meta name="theme-color" content="#6f4e37">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@ a{color:inherit}
 /* trees are static (blur baked in via SVG filters, painted once); only the three depth layers drift,
    so phones move a few GPU layers instead of re-blurring 15 animated trees every frame */
 .tlayer{position:absolute;inset:0;will-change:transform;animation:drift 18s ease-in-out infinite alternate}
-.tree{position:absolute;bottom:-4%;height:50%;width:auto}
+.tree{position:absolute;bottom:-1%;height:20%;width:auto}
 @keyframes drift{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
 /* forests hidden behind the cover don't need to paint or animate until it opens */
 body.locked .forest.fixed,body.locked #main{visibility:hidden}
@@ -73,8 +73,8 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
     url(img/m/top-r.webp) right top/50.15% auto no-repeat,
     url(img/m/bot-l.webp) left bottom/50.15% auto no-repeat,
     url(img/m/bot-r.webp) right bottom/50.15% auto no-repeat,
-    url(img/m/side-l.webp) left top/19% auto repeat-y,
-    url(img/m/side-r.webp) right top/19% auto repeat-y}
+    url(img/m/side-l.webp) left top/16% auto repeat-y,
+    url(img/m/side-r.webp) right top/16% auto repeat-y}
   /* the wayang are cut out of bot-l / bot-r into their own layers, laid exactly over them,
      and rock gently on their feet; transform-only so it stays on the GPU */
   .gebyok .wy{display:block;position:absolute;bottom:0;width:50.15%;aspect-ratio:524/401;background:center/100% no-repeat;will-change:transform;animation:wsway 3.6s ease-in-out infinite alternate}
@@ -190,7 +190,7 @@ section{position:relative;padding:68px 28px;text-align:center}
 .portrait::after{bottom:-30px;transform:scaleY(-1)}
 .portrait .inner{position:relative;width:100%;height:100%;border-radius:93px 93px 3px 3px;overflow:hidden;background:linear-gradient(#f7f5f0,#e4e1d9);box-shadow:0 0 0 1px rgba(167,130,60,.45);display:flex;align-items:center;justify-content:center}
 .portrait .inner .mono{position:relative;z-index:1;font-family:'Marcellus',serif;font-size:4.2rem;color:var(--title)}
-.portrait .inner svg.mini-tree{position:absolute;bottom:-6px;height:80%;opacity:.45}
+.portrait .inner svg.mini-tree{position:absolute;bottom:0;width:108%;height:auto;opacity:.45}
 .portrait img{width:100%;height:100%;object-fit:cover}
 .person h3{font-family:'Marcellus',serif;font-size:2.2rem;font-weight:400;line-height:1.1;color:var(--title)}
 .person .full{font-size:1.15rem;margin:4px 0 10px;color:var(--wood);font-weight:600}
@@ -334,11 +334,20 @@ nav.bottom svg{width:20px;height:20px}
     <filter id="tblur1" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.4"/></filter>
     <filter id="tblur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation=".6"/></filter>
   </defs>
-  <symbol id="tree" viewBox="0 0 120 200">
-    <path d="M57 200C59 160 55 130 58 100C60 80 57 60 59 40H63C65 70 63 90 65 110C67 140 66 170 70 200Z" fill="#a39e94"/>
-    <path d="M62 120C50 105 40 100 30 98M63 95C75 82 85 78 95 76M61 70C52 60 46 52 40 48M62 140C72 132 80 130 88 130" stroke="#a39e94" stroke-width="3" fill="none"/>
-    <g fill="#bdb9b0" opacity=".6"><circle cx="30" cy="90" r="22"/><circle cx="40" cy="58" r="24"/><circle cx="60" cy="34" r="28"/><circle cx="86" cy="54" r="24"/><circle cx="96" cy="82" r="20"/><circle cx="60" cy="70" r="26"/><circle cx="46" cy="108" r="15"/><circle cx="80" cy="104" r="17"/></g>
-    <g fill="#d9d6ce" opacity=".7"><circle cx="26" cy="84" r="12"/><circle cx="36" cy="52" r="13"/><circle cx="54" cy="26" r="15"/><circle cx="80" cy="48" r="12"/><circle cx="56" cy="64" r="12"/></g>
+  <!-- joglo house silhouette: ridge with mustaka, steep brunjung roof, flaring penanggap and
+       penitih eaves, saka posts around a gebyok wall, on a stone bebatur -->
+  <symbol id="joglo" viewBox="0 0 240 150">
+    <g fill="#a39e94">
+      <path d="M90 23Q95 19 99 24H141Q145 19 150 23L147 27H93Z"/>
+      <path d="M97 25H143L171 61Q120 57 69 61Z"/>
+      <path d="M71 59H169L211 81Q120 77 29 81Z"/>
+      <path d="M31 79H209L235 92Q120 88 5 92Z"/>
+      <path d="M14 91H226V95H14Z"/>
+      <path d="M19 95h4v33h-4zM49 95h4v33h-4zM79 95h4v33h-4zM157 95h4v33h-4zM187 95h4v33h-4zM217 95h4v33h-4z"/>
+      <path d="M2 128H238V137H2ZM96 137H144V143H96Z"/>
+    </g>
+    <path d="M83 99H157V128H83Z" fill="#bdb9b0" opacity=".75"/>
+    <path d="M110 104H130V128H110ZM90 106h12v10H90ZM138 106h12v10h-12Z" fill="#a39e94"/>
   </symbol>
   <symbol id="orchid" viewBox="-50 -50 100 100">
     <g fill="url(#petal)" stroke="#cdbfa6" stroke-width=".8">
@@ -364,7 +373,7 @@ nav.bottom svg{width:20px;height:20px}
   <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
     <p class="wedding-of seq d1">The Wedding of</p>
-    <h1 class="names seq d2">Muji &amp; Agatha</h1>
+    <h1 class="names seq d2">Agatha &amp; Muji</h1>
     <p class="date seq d3">21 November 2026</p>
     <div class="guest seq d4">
       <p class="label" style="margin-bottom:10px">Wedding Invitation</p>
@@ -387,7 +396,7 @@ nav.bottom svg{width:20px;height:20px}
   <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
   <div class="window-content">
     <p class="wedding-of">The Wedding of</p>
-    <h2 class="names">Muji &amp; Agatha</h2>
+    <h2 class="names">Agatha &amp; Muji</h2>
     <p class="date">SABTU · 21 NOVEMBER 2026</p>
   </div>
 </aside>
@@ -402,7 +411,7 @@ nav.bottom svg{width:20px;height:20px}
     <div class="bloom tr"><img src="img/orchid.webp" alt=""></div>
     <div class="window-content">
       <p class="wedding-of" data-anim="up" data-delay="150">The Wedding of</p>
-      <h2 class="names" data-anim="zoom" data-delay="300">Muji<br>&amp;<br>Agatha</h2>
+      <h2 class="names" data-anim="zoom" data-delay="300">Agatha<br>&amp;<br>Muji</h2>
       <p class="date" data-anim="up" data-delay="450">SABTU, 21 NOVEMBER 2026</p>
     </div>
   </section>
@@ -429,7 +438,7 @@ nav.bottom svg{width:20px;height:20px}
     <p data-anim="up" style="max-width:380px;margin:0 auto 26px">Dengan memohon rahmat dan berkat Tuhan, kami bermaksud menyelenggarakan Sakramen Perkawinan putra-putri kami:</p>
     <div class="person">
       <!-- Ganti dengan foto: <div class="inner"><img src="foto-muji.jpg" alt="Muji"></div> -->
-      <div class="portrait" data-anim="left"><div class="inner"><svg class="mini-tree" viewBox="0 0 120 200"><use href="#tree"/></svg><span class="mono">M</span></div></div>
+      <div class="portrait" data-anim="left"><div class="inner"><svg class="mini-tree" viewBox="0 0 240 150"><use href="#joglo"/></svg><span class="mono">M</span></div></div>
       <h3 data-anim="up">Muji</h3>
       <p class="full" data-anim="up">Yohanes Muji Purwanto</p>
       <p data-anim="up">Putra ke-4 dari 5 bersaudara<br>Bapak <b>Stephanus Minanto</b><br>&amp; Ibu <b>Bernadheta Tentrem</b></p>
@@ -438,7 +447,7 @@ nav.bottom svg{width:20px;height:20px}
     <div class="and" data-anim="zoom">&amp;</div>
     <div class="person">
       <!-- Ganti dengan foto: <div class="inner"><img src="foto-agatha.jpg" alt="Agatha"></div> -->
-      <div class="portrait" data-anim="right"><div class="inner"><svg class="mini-tree" viewBox="0 0 120 200"><use href="#tree"/></svg><span class="mono">A</span></div></div>
+      <div class="portrait" data-anim="right"><div class="inner"><svg class="mini-tree" viewBox="0 0 240 150"><use href="#joglo"/></svg><span class="mono">A</span></div></div>
       <h3 data-anim="up">Agatha</h3>
       <p class="full" data-anim="up">Agatha Mayasari</p>
       <p data-anim="up">Putri ke-3 dari 4 bersaudara<br>Bapak <b>Yoseph Susar</b><br>&amp; Ibu <b>Margaretha Sri Wahyuni</b></p>
@@ -459,7 +468,7 @@ nav.bottom svg{width:20px;height:20px}
       <div class="cd"><div><b id="cdS">0</b><span>Detik</span></div></div>
     </div>
     <a class="btn" data-anim="up" target="_blank" rel="noopener"
-       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan%20Muji%20%26%20Agatha&dates=20261121T030000Z/20261121T103000Z&details=Pemberkatan%2010.00-12.00%20di%20Gereja%20Maria%20Marganingsih%20Kalasan.%20Resepsi%2015.00-17.30%20di%20Srawung%20Resto%20%26%20Kopi.&location=Gereja%20Maria%20Marganingsih%20Kalasan%2C%20Sleman">
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan%20Agatha%20%26%20Muji&dates=20261121T030000Z/20261121T103000Z&details=Pemberkatan%2010.00-12.00%20di%20Gereja%20Maria%20Marganingsih%20Kalasan.%20Resepsi%2015.00-17.30%20di%20Srawung%20Resto%20%26%20Kopi.&location=Gereja%20Maria%20Marganingsih%20Kalasan%2C%20Sleman">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
       Simpan Tanggal
     </a>
@@ -510,7 +519,7 @@ nav.bottom svg{width:20px;height:20px}
       <p>Di bawah lengkung janur kuning,<br>dua langkah yang dulu berjauhan<br>kini belajar berjalan seirama,<br>pelan, sabar, dan penuh doa.</p>
       <p>Tak ada yang kebetulan<br>dalam pertemuan yang Tuhan rangkai;<br>setiap tawa, setiap air mata,<br>adalah benang yang menenun kita.</p>
       <p>Hari ini kami berjanji<br>di hadapan-Nya dan di hadapanmu:<br>saling menjaga sampai senja,<br>saling setia sampai selamanya.</p>
-      <p class="paper-sign">— Muji &amp; Agatha</p>
+      <p class="paper-sign">— Agatha &amp; Muji</p>
     </div>
   </section>
   <div class="ukir-band"></div>
@@ -604,7 +613,7 @@ nav.bottom svg{width:20px;height:20px}
     <p data-anim="up" style="max-width:380px;margin:90px auto 0">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restunya untuk pernikahan kami.</p>
     <p data-anim="up" style="margin-top:14px">Atas doa &amp; restunya, kami ucapkan terima kasih.</p>
     <p class="label" data-anim="up" style="margin-top:22px;color:var(--wood)">Matur Nuwun · Berkah Dalem</p>
-    <h2 class="names" data-anim="zoom">Muji &amp; Agatha</h2>
+    <h2 class="names" data-anim="zoom">Agatha &amp; Muji</h2>
     <p data-anim="up" style="font-size:.98rem">Kami yang berbahagia,<br>Keluarga Bapak Stephanus Minanto &amp; Ibu Bernadheta Tentrem<br>Keluarga Bapak Yoseph Susar &amp; Ibu Margaretha Sri Wahyuni</p>
     <svg class="divider" data-anim="zoom" style="margin-top:26px"><use href="#divider"/></svg>
     <footer>#MujiAgatha2026<br><small>Ornamen: <a href="https://www.freepik.com" target="_blank" rel="noopener">macrovector / Freepik</a></small></footer>
@@ -643,22 +652,22 @@ nav.bottom svg{width:20px;height:20px}
 
   function rng(seed){ return function(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
 
-  /* ---------- misty forest ---------- */
+  /* ---------- misty village: joglo silhouettes ---------- */
   function buildForest(el, seed){
     var r = rng(seed), html = '';
     var layers = [
-      { n: 7, h: [34, 48], op: [.28, .4], blur: 'tblur1' },
-      { n: 5, h: [46, 62], op: [.4, .55], blur: 'tblur2' },
-      { n: 3, h: [60, 78], op: [.5, .65], blur: '', edge: true }
+      { n: 4, h: [24, 30], op: [.34, .46], blur: 'tblur1' },
+      { n: 3, h: [30, 38], op: [.45, .58], blur: 'tblur2' },
+      { n: 2, h: [38, 46], op: [.55, .68], blur: '', edge: true }
     ];
     layers.forEach(function(L){
       html += '<div class="tlayer" style="animation-delay:' + (-r() * 18).toFixed(1) + 's">';
       for (var i = 0; i < L.n; i++) {
-        var left = L.edge ? (i % 2 ? 62 + r() * 22 : -12 + r() * 20) : (i / L.n) * 100 - 8 + r() * 10;
+        var left = L.edge ? (i % 2 ? 52 + r() * 16 : -34 + r() * 16) : (i / L.n) * 110 - 30 + r() * 12;
         var h = L.h[0] + r() * (L.h[1] - L.h[0]);
         var op = L.op[0] + r() * (L.op[1] - L.op[0]);
-        html += '<svg class="tree" viewBox="0 0 120 200" style="left:' + left.toFixed(1) + '%;height:' + h.toFixed(1) +
-          '%;opacity:' + op.toFixed(2) + '"><use href="#tree"' + (L.blur ? ' filter="url(#' + L.blur + ')"' : '') + '/></svg>';
+        html += '<svg class="tree" viewBox="0 0 240 150" style="left:' + left.toFixed(1) + '%;height:' + h.toFixed(1) +
+          '%;opacity:' + op.toFixed(2) + '"><use href="#joglo"' + (L.blur ? ' filter="url(#' + L.blur + ')"' : '') + '/></svg>';
       }
       html += '</div>';
     });
