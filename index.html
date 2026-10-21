@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#6f4e37">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <!-- cover frame images are CSS backgrounds, so the browser would find them late; fetch them up front -->
 <link rel="preload" as="image" href="img/frame-top.webp" fetchpriority="high">
 <link rel="preload" as="image" href="img/frame-bottom.webp" fetchpriority="high">
@@ -31,7 +31,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);font-size:18px;line-height:1.6;background:linear-gradient(#f4f1ea,#e8e5dd);overflow-x:hidden}
 body.locked{overflow:hidden;height:100vh}
 a{color:inherit}
-.label{font-family:'Cormorant Garamond',serif;letter-spacing:.28em;text-transform:uppercase;font-size:.78rem;font-weight:600}
+.label{font-family:'Cinzel',serif;letter-spacing:.2em;text-transform:uppercase;font-size:.78rem;font-weight:600}
 
 /* ===== misty forest ===== */
 .forest{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,#f7f5f0 0%,#eceae4 55%,#e2dfd7 100%)}
@@ -120,7 +120,7 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
 .window-content{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16% 15% 12%}
 .wedding-of{font-size:clamp(1.25rem,5.4vw,1.6rem);letter-spacing:.06em;color:var(--title);font-weight:500}
 .names{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(2.5rem,11vw,3.6rem);line-height:1.1;color:var(--title);margin:4px 0 6px;text-shadow:0 1px 0 rgba(255,255,255,.7)}
-.date{letter-spacing:.32em;font-size:.85rem;color:var(--wood);font-weight:600}
+.date{font-family:'Cinzel',serif;letter-spacing:.24em;font-size:.85rem;color:var(--wood);font-weight:600}
 .guest{margin:24px 0 20px}
 .guest p{font-size:.95rem}
 .guest .name{font-family:'Marcellus',serif;font-size:1.15rem;color:var(--wood-dark);margin-top:6px;padding:8px 18px;border-top:1px solid rgba(111,78,55,.4);border-bottom:1px solid rgba(111,78,55,.4);display:inline-block;min-width:200px;background:rgba(255,255,255,.45)}
@@ -214,9 +214,9 @@ section{position:relative;padding:68px 28px;text-align:center}
 .event .icon{width:64px;height:64px;margin:0 auto 4px;display:block}
 .event h3{font-family:'Marcellus',serif;font-size:2rem;font-weight:400;color:var(--title)}
 .event .row{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0}
-.event .day{letter-spacing:.2em;font-size:.85rem;font-weight:600;text-transform:uppercase}
+.event .day{font-family:'Cinzel',serif;letter-spacing:.16em;font-size:.82rem;font-weight:500;text-transform:uppercase}
 .event .num{font-family:'Marcellus',serif;font-size:2.5rem;color:var(--wood-dark);padding:0 14px;border-left:1px solid rgba(111,78,55,.4);border-right:1px solid rgba(111,78,55,.4);line-height:1.1}
-.event .time{letter-spacing:.12em;font-size:1rem;font-weight:600;margin-bottom:8px}
+.event .time{font-family:'Cinzel',serif;letter-spacing:.08em;font-size:.98rem;font-weight:500;margin-bottom:8px}
 .event .place{font-family:'Marcellus',serif;font-size:1.2rem;color:var(--wood-dark)}
 .event .place-sub{font-size:.98rem;margin-bottom:14px}
 .map{width:100%;height:180px;border-radius:12px;margin:4px 0 16px;border:1px solid rgba(111,78,55,.35);filter:sepia(.25) saturate(.85)}
@@ -514,14 +514,11 @@ nav.bottom svg{width:20px;height:20px}
   <section id="acara">
     <div class="arch-panel" data-anim="up">
       <h2 class="script-title">Wedding Event</h2>
-      <p class="quote" style="max-width:320px;margin:4px auto 6px">“Ia membuat segala sesuatu indah pada waktunya.”</p>
-      <p class="label" style="color:var(--wood)">Pengkhotbah 3 : 11</p>
-      <p style="max-width:330px;margin:12px auto 0">Dengan penuh sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia kami.</p>
+      <p style="max-width:330px;margin:6px auto 0">Tuhan membuat segala sesuatu indah pada waktunya. Indah saat Dia mempertemukan, indah saat Dia menumbuhkan kasih, dan indah saat Dia mempersatukan kami dalam suatu ikatan Pernikahan Kudus.</p>
       <svg class="divider"><use href="#divider"/></svg>
       <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M32 4v14M25 11h14M18 30l14-12 14 12v28H18z"/><path d="M27 58V44a5 5 0 0 1 10 0v14"/><circle cx="32" cy="32" r="3"/></svg>
-        <h3>Holy Matrimony</h3>
-        <p class="label sec-sub">Pemberkatan · Sakramen Perkawinan</p>
+        <h3>Pemberkatan</h3>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
         <p class="time">Pukul 10.00 – 12.00 WIB</p>
         <svg class="venue-pin"><use href="#pin"/></svg>
@@ -533,8 +530,7 @@ nav.bottom svg{width:20px;height:20px}
       <svg class="divider"><use href="#divider"/></svg>
       <div class="event" data-anim="up">
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#6f4e37" stroke-width="2"><path d="M20 8h10l-2 18a5 5 0 0 1-6 0zM34 8h10l-2 18a5 5 0 0 1-6 0z"/><path d="M25 28v24M39 28v24M18 56h14M32 56h14"/><path d="M48 12l6-4M50 18h6M14 12l-6-4M14 18H8"/></svg>
-        <h3>Wedding Reception</h3>
-        <p class="label sec-sub">Resepsi · Pahargyan</p>
+        <h3>Resepsi</h3>
         <div class="row"><span class="day">Sabtu</span><span class="num">21</span><span class="day">Nov 2026</span></div>
         <p class="time">Pukul 15.00 – 17.30 WIB</p>
         <svg class="venue-pin"><use href="#pin"/></svg>
