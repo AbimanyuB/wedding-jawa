@@ -1,6 +1,6 @@
 // Daily Vercel Cron hit (see vercel.json) so the free Supabase project never pauses for inactivity.
 module.exports = async (req, res) => {
-  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = process.env.SUPABASE_URL, key = (process.env.SUPABASE_SERVICE_ROLE_KEY || '').replace(/\s+/g, '');
   if (!url || !key) return res.status(500).json({ ok: false });
   const headers = { apikey: key };
   if (key.startsWith('eyJ')) headers.Authorization = 'Bearer ' + key;

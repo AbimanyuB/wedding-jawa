@@ -4,7 +4,8 @@
 const ATTEND = ['Hadir', 'Tidak Hadir', 'Masih Ragu'];
 
 function supa(path, init = {}) {
-  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // keys pasted into the dashboard can pick up line breaks, which are invalid in a header
+  const url = process.env.SUPABASE_URL, key = (process.env.SUPABASE_SERVICE_ROLE_KEY || '').replace(/\s+/g, '');
   if (!url || !key) throw new Error('SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set');
   const headers = { apikey: key, 'Content-Type': 'application/json', ...init.headers };
   // legacy service_role keys are JWTs and also go in Authorization; new sb_secret_ keys only in apikey
@@ -49,7 +50,8 @@ module.exports = async (req, res) => {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed' });
   } catch (e) {
-    console.error(e);
+    // message only, never the request: a bad header error would echo the key into the logs
+    console.error(String(e && e.message || e).replace(/sb_secret_\S+|eyJ\S+/g, '<key>').slice(0, 300));
     return res.status(500).json({ error: 'Server error' });
   }
 };
