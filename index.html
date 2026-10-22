@@ -12,9 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <!-- cover frame images are CSS backgrounds, so the browser would find them late; fetch them up front -->
-<link rel="preload" as="image" href="img/frame-top.webp" fetchpriority="high">
-<link rel="preload" as="image" href="img/frame-bottom.webp" fetchpriority="high">
-<link rel="preload" as="image" href="img/frame-side.webp" fetchpriority="high">
 <style>
 :root{
   --ivory:#f6f3ec;
@@ -61,36 +58,20 @@ body.locked .forest.fixed,body.locked #main{visibility:hidden}
 @keyframes fog{from{transform:translateX(-14%)}to{transform:translateX(14%)}}
 
 /* ===== gebyok frame & decor ===== */
-/* carved frame image cut into top / bottom bands plus a repeating side strip,
-   all scaled to the box width so it fits landscape desktop and tall mobile alike */
-.gebyok{position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:url(img/frame-top.webp) center top/100% auto no-repeat,
-    url(img/frame-bottom.webp) center bottom/100% auto no-repeat,
-    url(img/frame-side.webp) center top/100% auto repeat-y}
-/* on wide viewports scale by height as well (--fw = frame width that fits 1672x941),
-   letting the bands widen to the edges instead of growing tall */
-#cover .gebyok,.side .gebyok{background-size:100% calc(var(--fw)*300/1672),100% calc(var(--fw)*401/1672),100% calc(var(--fw)*480/1672)}
-#cover .gebyok{--fw:min(100vw,100vh*1672/941)}
-.side .gebyok{--fw:min(100vw - 480px,100vh*1672/941)}
-/* portrait phones: frame drawn 1.6x larger as edge-anchored halves (img/m/) that meet at the
-   symmetric centre, with the pendant and crown on top, so borders and wayang stay readable */
+/* no carved frame any more: only the two wayang stand in the bottom corners. Their cut-outs end
+   where the frame's bottom band used to cover them, so that edge sits below the screen and fades
+   out; they rock gently on their feet, transform-only so it stays on the GPU */
+.gebyok{position:absolute;inset:0;z-index:2;pointer-events:none}
+.gebyok .wy{position:absolute;--w:min(50.15%,52vh);width:var(--w);aspect-ratio:524/401;bottom:calc(var(--w)*-.33);
+  background:center/100% no-repeat;will-change:transform;animation:wsway 3.6s ease-in-out infinite alternate;
+  -webkit-mask-image:linear-gradient(#000 30%,transparent 47%);mask-image:linear-gradient(#000 30%,transparent 47%)}
+.gebyok .wy.l{left:0;background-image:url(img/m/wayang-l.webp);transform-origin:43.9% 47.4%}
+.gebyok .wy.r{right:0;background-image:url(img/m/wayang-r.webp);transform-origin:57.25% 47.9%;animation-delay:-1.8s}
 @media (max-width:959px) and (orientation:portrait){
-  .gebyok,#cover .gebyok{background:
-    url(img/m/pendant.webp) center top/16.08% auto no-repeat,
-    url(img/m/crown.webp) center bottom/16.08% auto no-repeat,
-    url(img/m/top-l.webp) left top/50.15% auto no-repeat,
-    url(img/m/top-r.webp) right top/50.15% auto no-repeat,
-    url(img/m/bot-l.webp) left bottom/50.15% auto no-repeat,
-    url(img/m/bot-r.webp) right bottom/50.15% auto no-repeat,
-    url(img/m/side-l.webp) left top/16% auto repeat-y,
-    url(img/m/side-r.webp) right top/16% auto repeat-y}
-  /* the wayang are cut out of bot-l / bot-r into their own layers, laid exactly over them,
-     and rock gently on their feet; transform-only so it stays on the GPU */
-  .gebyok .wy{display:block;position:absolute;bottom:0;width:50.15%;aspect-ratio:524/401;background:center/100% no-repeat;will-change:transform;animation:wsway 3.6s ease-in-out infinite alternate}
-  .gebyok .wy.l{left:0;background-image:url(img/m/wayang-l.webp);transform-origin:43.9% 47.4%}
-  .gebyok .wy.r{right:0;background-image:url(img/m/wayang-r.webp);transform-origin:57.25% 47.9%;animation-delay:-1.8s}
+  .gebyok .wy{--w:80%;bottom:calc(var(--w)*-.1)}
+  .gebyok .wy.l{left:-22%}
+  .gebyok .wy.r{right:-22%}
 }
-.wy{display:none}
 @keyframes wsway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
 @media (prefers-reduced-motion:reduce){.gebyok .wy{animation:none}}
 @media (max-width:959px){
