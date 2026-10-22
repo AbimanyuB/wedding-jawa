@@ -162,7 +162,7 @@ main{position:relative;z-index:1;max-width:480px;margin:0 auto;background:transp
   main{margin:0 0 0 auto}
 }
 section{position:relative;padding:68px 28px;text-align:center}
-.sec-title{font-family:'Marcellus',serif;font-weight:400;font-size:2.3rem;line-height:1.15;color:var(--title)}
+.sec-title,.script-title{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.3rem,10vw,2.9rem);line-height:1.05;color:var(--title)}
 .sec-sub{margin-top:4px;color:var(--wood)}
 .divider{width:min(270px,86%);height:auto;aspect-ratio:407.69/47.9;margin:10px auto 22px;display:block;color:#a7823c}
 .ukir-band{position:relative;z-index:1;height:14px;background:var(--ukir);background-size:28px;box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
@@ -248,7 +248,6 @@ section{position:relative;padding:68px 28px;text-align:center}
 .story h3{font-family:'Marcellus',serif;font-weight:400;font-size:1.45rem;line-height:1.3;color:var(--title);margin:4px 0 14px}
 .story p{font-size:1.04rem;line-height:1.75;text-wrap:pretty}
 .story p+p{margin-top:14px}
-.script-title{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.6rem,11.5vw,3.3rem);line-height:1.05;color:var(--title)}
 .arch-panel .divider{margin:14px auto 18px}
 .arch-panel .person{margin:26px auto 4px}
 .arch-panel .person h3{font-family:'Great Vibes',cursive;font-size:3rem;line-height:1.1;margin-top:4px}
@@ -313,7 +312,7 @@ form.rsvp .btn{margin-top:16px;width:100%;justify-content:center}
   background:rgba(250,247,240,.74);box-shadow:0 0 36px 26px rgba(250,247,240,.74)}
 #savedate::before{inset:40px 18px 40px}
 #penutup::before{inset:80px 18px 120px}
-#penutup .names{font-size:3rem;margin:8px 0 14px}
+#penutup .names{font-size:clamp(1.9rem,8.5vw,2.3rem);margin:22px 0 4px}
 footer{font-size:.85rem;opacity:.65;margin-top:30px}
 .sec-bloom{position:absolute;top:0;right:0;width:120px;pointer-events:none}
 .sec-bloom.left{right:auto;left:0;transform:scaleX(-1)}
@@ -485,24 +484,8 @@ nav.bottom svg{width:20px;height:20px}
     </div>
   </section>
 
-  <!-- LOVE STORY -->
-  <section id="kisah" style="padding-top:28px">
-    <h2 class="sec-title" data-anim="up">Our Love Story</h2>
-    <p class="label sec-sub" data-anim="up">Kisah Kami</p>
-    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
-    <div class="arch-card story" data-anim="up">
-      <div class="in">
-        <div class="couple-photo"><img src="img/gallery/g3.webp" width="800" height="1200" alt="Agatha dan Muji di Kandang Gadri" loading="lazy" decoding="async"></div>
-        <h3>Kami Tumbuh Bersama Kandang Gadri</h3>
-        <p>Tidak semua kisah cinta dimulai dari hal-hal besar. Kisah kami bertumbuh perlahan melalui mimpi yang sama, sebuah usaha sederhana bernama Kandang Gadri. Dari kepedulian terhadap lingkungan dan keinginan untuk menciptakan sesuatu yang bermanfaat, kami belajar berjalan berdampingan dalam setiap langkah yang kami ambil.</p>
-        <p>Melalui proses mengembangkan Kandang Gadri, kami belajar arti kerja sama, kesabaran, saling mendengarkan, saling percaya, dan saling mendukung. Setiap tantangan menjadi pelajaran, setiap keberhasilan menjadi alasan untuk bersyukur bersama. Di tengah kesibukan merawat usaha ini, tanpa kami sadari, rasa sayang dan komitmen antara kami pun semakin bertumbuh.</p>
-        <p>Bagi orang lain, Kandang Gadri mungkin hanya terlihat sebagai kandang ayam yang memanfaatkan limbah dapur menjadi pakan fermentasi. Namun bagi kami, tempat ini adalah ruang untuk kami bertumbuh. Saksi perjalanan dua hati yang belajar saling menguatkan dan merawat mimpi bersama. Dari sinilah perjalanan kami dimulai, hingga akhirnya akan mengantarkan kami pada hari yang penuh syukur untuk membangun kehidupan sebagai suami dan istri. Semoga kami terus bertumbuh bersama, sebagaimana Kandang Gadri yang tumbuh bersama kami.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- COUPLE -->
-  <section id="mempelai" style="padding-top:20px">
+  <section id="mempelai" style="padding-top:28px">
     <div class="arch-panel" data-anim="up">
       <h2 class="script-title">Bride &amp; Groom</h2>
       <svg class="divider"><use href="#divider"/></svg>
@@ -576,10 +559,25 @@ nav.bottom svg{width:20px;height:20px}
   </section>
   <div class="ukir-band"></div>
 
+  <!-- LOVE STORY -->
+  <section id="kisah">
+    <h2 class="sec-title" data-anim="up">Our Love Story</h2>
+    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
+    <div class="arch-card story" data-anim="up">
+      <div class="in">
+        <div class="couple-photo"><img src="img/gallery/g3.webp" width="800" height="1200" alt="Agatha dan Muji di Kandang Gadri" loading="lazy" decoding="async"></div>
+        <h3>Kami Tumbuh Bersama Kandang Gadri</h3>
+        <p>Tidak semua kisah cinta dimulai dari hal-hal besar. Kisah kami bertumbuh perlahan melalui mimpi yang sama, sebuah usaha sederhana bernama Kandang Gadri. Dari kepedulian terhadap lingkungan dan keinginan untuk menciptakan sesuatu yang bermanfaat, kami belajar berjalan berdampingan dalam setiap langkah yang kami ambil.</p>
+        <p>Melalui proses mengembangkan Kandang Gadri, kami belajar arti kerja sama, kesabaran, saling mendengarkan, saling percaya, dan saling mendukung. Setiap tantangan menjadi pelajaran, setiap keberhasilan menjadi alasan untuk bersyukur bersama. Di tengah kesibukan merawat usaha ini, tanpa kami sadari, rasa sayang dan komitmen antara kami pun semakin bertumbuh.</p>
+        <p>Bagi orang lain, Kandang Gadri mungkin hanya terlihat sebagai kandang ayam yang memanfaatkan limbah dapur menjadi pakan fermentasi. Namun bagi kami, tempat ini adalah ruang untuk kami bertumbuh. Saksi perjalanan dua hati yang belajar saling menguatkan dan merawat mimpi bersama. Dari sinilah perjalanan kami dimulai, hingga akhirnya akan mengantarkan kami pada hari yang penuh syukur untuk membangun kehidupan sebagai suami dan istri. Semoga kami terus bertumbuh bersama, sebagaimana Kandang Gadri yang tumbuh bersama kami.</p>
+      </div>
+    </div>
+  </section>
+  <div class="ukir-band"></div>
+
   <!-- GALLERY -->
   <section id="galeri">
     <h2 class="sec-title" data-anim="up">Our Moment</h2>
-    <p class="label sec-sub" data-anim="up">Galeri Bahagia</p>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <div class="gallery">
       <button type="button" class="g-item wide" data-anim="up"><img src="img/gallery/g1.webp" alt="Agatha dan Muji di tepi saluran air" loading="lazy" decoding="async"></button>
@@ -597,9 +595,6 @@ nav.bottom svg{width:20px;height:20px}
 
   <!-- POEM -->
   <section id="puisi">
-    <h2 class="sec-title" data-anim="up">A Poem</h2>
-    <p class="label sec-sub" data-anim="up">Sepucuk Puisi</p>
-    <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <div class="arch-card poem" data-anim="up">
       <div class="in">
         <h3>Aku Ingin</h3>
@@ -614,7 +609,6 @@ nav.bottom svg{width:20px;height:20px}
   <!-- GIFT -->
   <section id="kado">
     <h2 class="sec-title" data-anim="up">Wedding Gift</h2>
-    <p class="label sec-sub" data-anim="up">Tanda Kasih</p>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <p class="gift-intro" data-anim="up">Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun apabila ingin memberikan tanda kasih, dapat melalui:</p>
     <div class="card" data-anim="left">
@@ -648,7 +642,6 @@ nav.bottom svg{width:20px;height:20px}
   <!-- RSVP -->
   <section id="ucapan">
     <h2 class="sec-title" data-anim="up">RSVP</h2>
-    <p class="label sec-sub" data-anim="up">Konfirmasi Kehadiran</p>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <p data-anim="up" style="max-width:380px;margin:0 auto 10px">Mohon kesediaan Bapak/Ibu/Saudara/i untuk mengonfirmasi kehadiran serta memberikan ucapan dan doa restu.</p>
     <form class="rsvp" id="rsvpForm" data-anim="up">
@@ -665,7 +658,6 @@ nav.bottom svg{width:20px;height:20px}
       <button class="btn" type="submit">Kirim Ucapan</button>
     </form>
     <h2 class="sec-title" data-anim="up" style="margin-top:48px">Best Wishes</h2>
-    <p class="label sec-sub" data-anim="up">Ucapan &amp; Doa</p>
     <div class="stats" data-anim="up">
       <div><b id="stHadir">0</b><span>Hadir</span></div>
       <div><b id="stTidak">0</b><span>Tidak Hadir</span></div>
@@ -679,12 +671,11 @@ nav.bottom svg{width:20px;height:20px}
   <section id="penutup">
     <div class="sec-bloom"><img src="img/orchid.webp" alt=""></div>
     <div class="sec-bloom left"><img src="img/orchid.webp" alt=""></div>
-    <p data-anim="up" style="max-width:380px;margin:90px auto 0">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restunya untuk pernikahan kami.</p>
-    <p data-anim="up" style="margin-top:14px">Atas doa &amp; restunya, kami ucapkan terima kasih.</p>
+    <p data-anim="up" style="max-width:380px;margin:90px auto 0">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restunya untuk pernikahan kami.</p>
+    <p data-anim="up" style="margin-top:14px">Atas doa &amp; restunya,<br>kami ucapkan terima kasih.</p>
     <h2 class="names" data-anim="zoom">Agatha &amp; Muji</h2>
-    <p data-anim="up" style="font-size:.98rem">Kami yang berbahagia,<br>Keluarga Bapak Stephanus Minanto &amp; Ibu Bernadheta Tentrem<br>Keluarga Bapak Yoseph Susar &amp; Ibu Margaretha Sri Wahyuni</p>
-    <svg class="divider" data-anim="zoom" style="margin-top:26px"><use href="#divider"/></svg>
-    <footer>#MujiAgatha2026<br><small>Ornamen: <a href="https://www.freepik.com" target="_blank" rel="noopener">macrovector / Freepik</a></small></footer>
+    <svg class="divider" data-anim="zoom" style="margin-top:22px"><use href="#divider"/></svg>
+    <footer>#AgathaMuji2026</footer>
   </section>
 </main>
 
