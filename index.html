@@ -657,6 +657,7 @@ nav.bottom svg{width:20px;height:20px}
       </select>
       <label class="label" for="fMsg">Ucapan &amp; Doa</label>
       <textarea id="fMsg" required maxlength="500" placeholder="Tuliskan ucapan dan doa restu"></textarea>
+      <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="btn" type="submit">Kirim Ucapan</button>
     </form>
     <h2 class="sec-title" data-anim="up" style="margin-top:48px">Best Wishes</h2>
@@ -917,15 +918,20 @@ nav.bottom svg{width:20px;height:20px}
     ['home', 'mempelai', 'acara', 'galeri', 'kado', 'ucapan'].forEach(function(id){ navIo.observe(document.getElementById(id)); });
   }
 
-  /* ---------- RSVP & wishes (stored in this browser only) ---------- */
-  var KEY = 'mujiagatha_wishes';
-  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
-  function save(list){ try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {} }
+  /* ---------- RSVP & wishes (shared through /api/rsvp, stored in Supabase) ---------- */
   var wishesEl = document.getElementById('wishes');
-  function render(){
-    var list = load();
-    var c = { 'Hadir': 0, 'Tidak Hadir': 0, 'Masih Ragu': 0 };
-    list.forEach(function(w){ if (c[w.attend] !== undefined) c[w.attend]++; });
+  function load(){
+    return fetch('/api/rsvp', { cache: 'no-store' })
+      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(render)
+      .catch(function(){
+        wishesEl.innerHTML = '';
+        var e = document.createElement('p'); e.className = 'empty'; e.textContent = 'Ucapan belum dapat dimuat.';
+        wishesEl.appendChild(e);
+      });
+  }
+  function render(data){
+    var list = data.wishes, c = data.counts;
     document.getElementById('stHadir').textContent = c['Hadir'];
     document.getElementById('stTidak').textContent = c['Tidak Hadir'];
     document.getElementById('stRagu').textContent = c['Masih Ragu'];
@@ -934,7 +940,7 @@ nav.bottom svg{width:20px;height:20px}
       var e = document.createElement('p'); e.className = 'empty'; e.textContent = 'Jadilah yang pertama memberikan ucapan.';
       wishesEl.appendChild(e); return;
     }
-    list.slice().reverse().forEach(function(w){
+    list.forEach(function(w){
       var d = document.createElement('div'); d.className = 'wish';
       var who = document.createElement('div'); who.className = 'who'; who.textContent = w.name;
       var tg = document.createElement('span'); tg.className = 'tag'; tg.textContent = w.attend; who.appendChild(tg);
@@ -947,16 +953,24 @@ nav.bottom svg{width:20px;height:20px}
   if (to) document.getElementById('fName').value = to.slice(0, 60);
   document.getElementById('rsvpForm').addEventListener('submit', function(ev){
     ev.preventDefault();
+    var form = this, btn = form.querySelector('button[type=submit]');
     var name = document.getElementById('fName').value.trim();
     var msg = document.getElementById('fMsg').value.trim();
-    if (!name || !msg) return;
-    var list = load();
-    list.push({ name: name, attend: document.getElementById('fAttend').value, msg: msg, t: Date.now() });
-    save(list); render();
-    this.reset();
-    showToast('Terima kasih atas ucapannya');
+    if (!name || !msg || btn.disabled) return;
+    btn.disabled = true;
+    fetch('/api/rsvp', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, attend: document.getElementById('fAttend').value, msg: msg, website: form.website.value })
+    }).then(function(r){
+      if (!r.ok) throw new Error(r.status);
+      form.reset();
+      showToast('Terima kasih atas ucapannya');
+      return load();
+    }).catch(function(){
+      showToast('Gagal mengirim, silakan coba lagi');
+    }).then(function(){ btn.disabled = false; });
   });
-  render();
+  load();
 })();
 </script>
 </body>
