@@ -771,8 +771,16 @@ nav.bottom svg{width:20px;height:20px}
   });
 
   /* ---------- guest name from ?to=Nama ---------- */
-  var params = new URLSearchParams(location.search);
-  var to = params.get('to') || params.get('kepada');
+  /* read the raw query so an unencoded "&" in the name ("?to=Risma & Keluarga") stays part of it:
+     pieces after "&" are rejoined until one looks like a real key=value parameter (fbclid etc.) */
+  var to = null, m = location.search.match(/[?&](?:to|kepada)=([^]*)/);
+  if (m) {
+    var parts = m[1].split('&'), kept = [parts[0]];
+    for (var i = 1; i < parts.length && !/^[A-Za-z_][\w.-]*=/.test(parts[i]); i++) kept.push(parts[i]);
+    to = kept.join('&').replace(/\+/g, ' ');
+    try { to = decodeURIComponent(to); } catch (e) {}
+    to = to.replace(/\s+/g, ' ').trim();
+  }
   if (to) document.getElementById('guestName').textContent = to.slice(0, 80);
 
   var cover = document.getElementById('cover');
