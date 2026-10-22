@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   const headers = { apikey: key };
   if (key.startsWith('eyJ')) headers.Authorization = 'Bearer ' + key;
   try {
-    const r = await fetch(url.replace(/\/+$/, '') + '/rest/v1/rsvp?select=id&limit=1', { headers });
+    const r = await fetch(url.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '') + '/rest/v1/rsvp?select=id&limit=1', { headers });
     res.status(r.ok ? 200 : 502).json({ ok: r.ok, status: r.status });
   } catch (e) {
     res.status(500).json({ ok: false });

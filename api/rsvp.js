@@ -9,7 +9,8 @@ function supa(path, init = {}) {
   const headers = { apikey: key, 'Content-Type': 'application/json', ...init.headers };
   // legacy service_role keys are JWTs and also go in Authorization; new sb_secret_ keys only in apikey
   if (key.startsWith('eyJ')) headers.Authorization = 'Bearer ' + key;
-  return fetch(url.replace(/\/+$/, '') + '/rest/v1/' + path, { ...init, headers });
+  // accept the project URL with or without a trailing /rest/v1
+  return fetch(url.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/, '') + '/rest/v1/' + path, { ...init, headers });
 }
 
 const clean = (v, max) => String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, max);
