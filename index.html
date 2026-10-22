@@ -250,6 +250,7 @@ section{position:relative;padding:68px 28px;text-align:center}
 
 /* ===== gift ===== */
 .gift-intro{max-width:380px;margin:0 auto 22px}
+.gift-acc:not([hidden]){animation:fadeUp .6s cubic-bezier(.2,.8,.2,1) both}
 .card{position:relative;max-width:360px;margin:0 auto 18px;padding:22px 20px;text-align:left;border-radius:16px;color:#f6efe2;overflow:hidden;background:linear-gradient(135deg,#8a6448,#5e4130 60%,#3f2b1e);box-shadow:0 14px 28px rgba(63,43,30,.35)}
 .card::after{content:"";position:absolute;inset:0;background:var(--ukir);background-size:40px;opacity:.18;pointer-events:none}
 .card .bank{font-family:'Marcellus',serif;letter-spacing:.12em;color:#f0dcb4;font-size:1.05rem}
@@ -590,19 +591,22 @@ nav.bottom svg{width:20px;height:20px}
     <h2 class="sec-title" data-anim="up">Wedding Gift</h2>
     <svg class="divider" data-anim="zoom"><use href="#divider"/></svg>
     <p class="gift-intro" data-anim="up">Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun apabila ingin memberikan tanda kasih, dapat melalui:</p>
-    <div class="card" data-anim="left">
+    <button class="btn" id="accToggle" type="button" aria-expanded="false" aria-controls="giftAcc" data-anim="up" style="margin-bottom:22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><span>Tampilkan Rekening</span></button>
+    <div class="gift-acc" id="giftAcc" hidden>
+    <div class="card">
       <div class="chip"></div>
       <div class="bank">CIMB NIAGA</div>
       <div class="no">7064 4493 5900</div>
       <div class="an">a.n. Agatha Mayasari</div>
       <button class="btn copy" type="button" data-copy="706444935900"><svg><use href="#copy"/></svg>Salin No. Rekening</button>
     </div>
-    <div class="card" data-anim="right">
+    <div class="card">
       <div class="chip"></div>
       <div class="bank">BANK BCA</div>
       <div class="no">6975 6217 51</div>
       <div class="an">a.n. Muji Purwanto</div>
       <button class="btn copy" type="button" data-copy="6975621751"><svg><use href="#copy"/></svg>Salin No. Rekening</button>
+    </div>
     </div>
     <div class="arch-card address-box" data-anim="up">
       <div class="in">
@@ -625,7 +629,7 @@ nav.bottom svg{width:20px;height:20px}
     <p data-anim="up" style="max-width:380px;margin:0 auto 10px">Mohon kesediaan Bapak/Ibu/Saudara/i untuk mengonfirmasi kehadiran serta memberikan ucapan dan doa restu.</p>
     <form class="rsvp" id="rsvpForm" data-anim="up">
       <label class="label" for="fName">Nama</label>
-      <input id="fName" required maxlength="60" placeholder="Nama Anda">
+      <input id="fName" required maxlength="60" placeholder="Nama Anda" autocomplete="off">
       <label class="label" for="fAttend">Kehadiran</label>
       <select id="fAttend" required>
         <option value="Hadir">Hadir</option>
@@ -927,7 +931,13 @@ nav.bottom svg{width:20px;height:20px}
       wishesEl.appendChild(d);
     });
   }
-  if (to) document.getElementById('fName').value = to.slice(0, 60);
+  /* bank accounts stay hidden until asked for */
+  var accBtn = document.getElementById('accToggle'), acc = document.getElementById('giftAcc');
+  accBtn.addEventListener('click', function(){
+    acc.hidden = !acc.hidden;
+    accBtn.setAttribute('aria-expanded', String(!acc.hidden));
+    accBtn.querySelector('span').textContent = acc.hidden ? 'Tampilkan Rekening' : 'Sembunyikan Rekening';
+  });
   document.getElementById('rsvpForm').addEventListener('submit', function(ev){
     ev.preventDefault();
     var form = this, btn = form.querySelector('button[type=submit]');
