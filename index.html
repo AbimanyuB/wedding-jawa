@@ -351,9 +351,9 @@ nav.bottom a.active{background:rgba(240,220,180,.22)}
 .g-item.tall{grid-row:span 2}
 .g-item.wide{grid-column:span 2;grid-row:span 2}
 .g-item.feature{grid-column:span 2;grid-row:span 4}
-/* the drawn portrait is shown whole on white instead of cropped like the photos */
-.g-item.art{grid-column:span 2;grid-row:span 2}
-.g-item.art img{object-fit:contain;background:#fff}
+/* the drawn portrait sits under the grid in a frame of its own 5:4 shape, so it is never cropped
+   or letterboxed at any width */
+.g-item.art{display:block;width:100%;margin-top:10px;aspect-ratio:5/4}
 .g-item:first-child{border-radius:120px 120px 14px 14px}
 .g-item:first-child img{border-radius:116px 116px 10px 10px}
 .lightbox{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:60px 12px;background:rgba(30,20,14,.92);animation:lbIn .35s ease both}
@@ -589,8 +589,8 @@ nav.bottom svg{width:20px;height:20px}
       <button type="button" class="g-item tall" data-anim="left"><img src="img/gallery/g10.webp" alt="Agatha dan Muji menggendong ayam di Kandang Gadri" loading="lazy" decoding="async"></button>
       <button type="button" class="g-item tall" data-anim="right"><img src="img/gallery/g9.webp" alt="Agatha dan Muji di depan candi" loading="lazy" decoding="async"></button>
       <button type="button" class="g-item wide" data-anim="up"><img src="img/gallery/g12.webp" alt="Agatha dan Muji dengan sekeranjang telur di Kandang Gadri" loading="lazy" decoding="async"></button>
-      <button type="button" class="g-item art" data-anim="up"><img src="img/gallery/g13.webp" alt="Ilustrasi Muji dan Agatha bersama ayam Kandang Gadri" loading="lazy" decoding="async"></button>
     </div>
+    <button type="button" class="g-item art" data-anim="up"><img src="img/gallery/g13.webp" alt="Ilustrasi Muji dan Agatha bersama ayam Kandang Gadri" loading="lazy" decoding="async"></button>
   </section>
   <div class="ukir-band"></div>
 
